@@ -1,0 +1,187 @@
+<div class="container-fluid" [style.display]="isFormVisible ? 'block' : 'none'">
+    <form id="form-categories-filter" action="" method="get" enctype="application/x-www-form-urlencoded">
+        <div class="row justify-content-sm-start">
+            <div class="col-xs-4">
+
+                <select name="type" id="type" class="form-control form-control-sm">
+                    <option value="">Type de sortie</option>
+                    <option value="drink">Boire un verre</option>
+                    <option value="culture">Culture</option>
+                    <option value="dance">Danser</option>
+                    <option value="discover">Découverte</option>
+                    <option value="relax">Détente</option>
+                    <option value="movie">Film</option>
+                    <option value="game">Jouer</option>
+                    <option value="music">Musique</option>
+                    <option value="picnic">Picnic</option>
+                    <option value="outdoor">Plein air</option>
+                    <option value="meal">Resto</option>
+                    <option value="stay">Séjour</option>
+                    <option value="spectacle">Spectacle</option>
+                    <option value="sport">Sport</option>
+                </select> </div>
+            <div class="col-xs-4 ml-3">
+
+                <select name="region" id="region" class="form-control form-control-sm">
+                    <option value="">Toutes les régions</option>
+                    <option value="alsace">Alsace</option>
+                    <option value="aquitaine">Aquitaine</option>
+                    <option value="auvergne">Auvergne</option>
+                    <option value="basse-normandie">Basse Normandie</option>
+                    <option value="bourgogne">Bourgogne</option>
+                    <option value="bretagne">Bretagne</option>
+                    <option value="centre">Centre</option>
+                    <option value="champagne-ardenne">Champagne Ardenne</option>
+                    <option value="collectivites-outre-mer">Collectivités d'Outre Mer</option>
+                    <option value="corse">Corse</option>
+                    <option value="departements-outre-mer">Départements d'Outre Mer</option>
+                    <option value="franche-comte">Franche Comté</option>
+                    <option value="haute-normandie">Haute Normandie</option>
+                    <option value="ile-de-france" selected="selected">Ile de France</option>
+                    <option value="languedoc-roussillon">Languedoc Roussillon</option>
+                    <option value="limousin">Limousin</option>
+                    <option value="lorraine">Lorraine</option>
+                    <option value="midi-pyrenees">Midi Pyrénées</option>
+                    <option value="nord-pas-de-calais">Nord Pas de Calais</option>
+                    <option value="pays-de-la-loire">Pays de la Loire</option>
+                    <option value="picardie">Picardie</option>
+                    <option value="poitou-charentes">Poitou Charentes</option>
+                    <option value="provence-alpes-cote-azur">Provence Alpes Côte d'Azur</option>
+                    <option value="rhone-alpes">Rhône Alpes</option>
+                </select> </div>
+            <div class="col-xs-4 ml-3">
+
+                <select name="departement" id="departement" class="form-control form-control-sm">
+                    <option value="">Tous les départements</option>
+                    <option value="ain">01 - Ain</option>
+                    <option value="aisne">02 - Aisne</option>
+                    <option value="allier">03 - Allier</option>
+                    <option value="alpes-de-haute-provence">04 - Alpes de Haute Provence</option>
+                    <option value="hautes-alpes">05 - Hautes Alpes</option>
+                    <option value="alpes-maritimes">06 - Alpes Maritimes</option>
+                    <option value="ardeche">07 - Ardèche</option>
+                    <option value="ardennes">08 - Ardennes</option>
+                    <option value="ariege">09 - Ariège</option>
+                    <option value="aube">10 - Aube</option>
+                    <option value="aude">11 - Aude</option>
+                    <option value="aveyron">12 - Aveyron</option>
+                    <option value="bouches-du-rhone">13 - Bouches du Rhône</option>
+                    <option value="calvados">14 - Calvados</option>
+                    <option value="cantal">15 - Cantal</option>
+                    <option value="charente">16 - Charente</option>
+                    <option value="charente-maritime">17 - Charente Maritime</option>
+                    <option value="cher">18 - Cher</option>
+                    <option value="correze">19 - Corrèze</option>
+                    <option value="cote-or">21 - Côte d'Or</option>
+                    <option value="cotes-armor">22 - Côtes d'Armor</option>
+                    <option value="creuse">23 - Creuse</option>
+                    <option value="dordogne">24 - Dordogne</option>
+                    <option value="doubs">25 - Doubs</option>
+                    <option value="drome">26 - Drôme</option>
+                    <option value="eure">27 - Eure</option>
+                    <option value="eure-et-loir">28 - Eure et Loir</option>
+                    <option value="finistere">29 - Finistère</option>
+                    <option value="corse-du-sud">2A - Corse du Sud</option>
+                    <option value="haute-corse">2B - Haute Corse</option>
+                    <option value="gard">30 - Gard</option>
+                    <option value="haute-garonne">31 - Haute Garonne</option>
+                    <option value="gers">32 - Gers</option>
+                    <option value="gironde">33 - Gironde</option>
+                    <option value="herault">34 - Hérault</option>
+                    <option value="ille-et-vilaine">35 - Ille et Vilaine</option>
+                    <option value="indre">36 - Indre</option>
+                    <option value="indre-et-loire">37 - Indre et Loire</option>
+                    <option value="isere">38 - Isère</option>
+                    <option value="jura">39 - Jura</option>
+                    <option value="landes">40 - Landes</option>
+                    <option value="loir-et-cher">41 - Loir et Cher</option>
+                    <option value="loire">42 - Loire</option>
+                    <option value="haute-loire">43 - Haute Loire</option>
+                    <option value="loire-atlantique">44 - Loire Atlantique</option>
+                    <option value="loiret">45 - Loiret</option>
+                    <option value="lot">46 - Lot</option>
+                    <option value="lot-et-garonne">47 - Lot et Garonne</option>
+                    <option value="lozere">48 - Lozère</option>
+                    <option value="maine-et-loire">49 - Maine et Loire</option>
+                    <option value="manche">50 - Manche</option>
+                    <option value="marne">51 - Marne</option>
+                    <option value="haute-marne">52 - Haute Marne</option>
+                    <option value="mayenne">53 - Mayenne</option>
+                    <option value="meurthe-et-moselle">54 - Meurthe et Moselle</option>
+                    <option value="meuse">55 - Meuse</option>
+                    <option value="morbihan">56 - Morbihan</option>
+                    <option value="moselle">57 - Moselle</option>
+                    <option value="nievre">58 - Nièvre</option>
+                    <option value="nord">59 - Nord</option>
+                    <option value="oise">60 - Oise</option>
+                    <option value="orne">61 - Orne</option>
+                    <option value="pas-de-calais">62 - Pas de Calais</option>
+                    <option value="puy-de-dome">63 - Puy de Dôme</option>
+                    <option value="pyrenees-atlantiques">64 - Pyrénées Atlantiques</option>
+                    <option value="hautes-pyrenees">65 - Hautes Pyrénées</option>
+                    <option value="pyrenees-orientales">66 - Pyrénées Orientales</option>
+                    <option value="bas-rhin">67 - Bas Rhin</option>
+                    <option value="haut-rhin">68 - Haut Rhin</option>
+                    <option value="rhone">69 - Rhône</option>
+                    <option value="haute-saone">70 - Haute Saône</option>
+                    <option value="saone-et-loire">71 - Saône et Loire</option>
+                    <option value="sarthe">72 - Sarthe</option>
+                    <option value="savoie">73 - Savoie</option>
+                    <option value="haute-savoie">74 - Haute Savoie</option>
+                    <option value="paris">75 - Paris</option>
+                    <option value="seine-maritime">76 - Seine Maritime</option>
+                    <option value="seine-et-marne">77 - Seine et Marne</option>
+                    <option value="yvelines">78 - Yvelines</option>
+                    <option value="deux-sevres">79 - Deux Sèvres</option>
+                    <option value="somme">80 - Somme</option>
+                    <option value="tarn">81 - Tarn</option>
+                    <option value="tarn-et-garonne">82 - Tarn et Garonne</option>
+                    <option value="var">83 - Var</option>
+                    <option value="vaucluse">84 - Vaucluse</option>
+                    <option value="vendee">85 - Vendée</option>
+                    <option value="vienne">86 - Vienne</option>
+                    <option value="haute-vienne">87 - Haute Vienne</option>
+                    <option value="vosges">88 - Vosges</option>
+                    <option value="yonne">89 - Yonne</option>
+                    <option value="territoire-de-belfort">90 - Territoire de Belfort</option>
+                    <option value="essonne">91 - Essonne</option>
+                    <option value="hauts-de-seine">92 - Hauts de Seine</option>
+                    <option value="seine-saint-denis">93 - Seine Saint Denis</option>
+                    <option value="val-de-marne">94 - Val de Marne</option>
+                    <option value="val-oise">95 - Val d'Oise</option>
+                    <option value="guadeloupe">971 - Guadeloupe</option>
+                    <option value="saint-barthelemy">971 - Saint Barthélemy</option>
+                    <option value="saint-martin">971 - Saint Martin</option>
+                    <option value="martinique">972 - Martinique</option>
+                    <option value="guyane">973 - Guyane</option>
+                    <option value="la-reunion">974 - La Réunion</option>
+                    <option value="saint-pierre-et-miquelon">975 - Saint Pierre et Miquelon</option>
+                    <option value="mayotte">976 - Mayotte</option>
+                    <option value="wallis-et-futuna">986 - Wallis et Futuna</option>
+                    <option value="polynesie-francaise">987 - Polynésie Française</option>
+                    <option value="nouvelle-caledonie">988 - Nouvelle Calédonie</option>
+                </select> </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+
+                <input type="text" name="date" id="date" value=""
+                    class="form-control form-control-sm date hasDatepicker" placeholder="Date de sortie"> </div>
+            <div class="col-xs-6 ml-3">
+
+                <input type="text" name="keywords" id="keywords" value="" class="form-control form-control-sm"
+                    placeholder="Mot-clé"> </div>
+
+            <div class="col-xs-3 ml-3">
+
+                <input type="submit" name="research" id="research" value="Rechercher"
+                    class="btn btn-primary btn-sm pull-right"> </div>
+        </div>
+
+    </form>
+</div>

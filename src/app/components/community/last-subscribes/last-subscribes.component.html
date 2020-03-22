@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <!-- Breadcrumb -->
+    <h6 class="card-title d-flex" style="margin-top: 20px;">La Communauté > Derniers inscrits</h6>
+
+    <div class="list-group">
+        <a *ngFor="let ls of lastSubscribes" class="list-group-item list-group-item-action">
+            <div class="d-flex justify-content-start">
+
+                <!-- Partie gauche : photo du profil -->
+                <div style="width: 50px;height: 50px;">
+                    <img [src]="ls.avatar" />
+                </div>
+
+                <!-- Partie droite : Description du profil-->
+                <div>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ ls.firstname + " " + ls.lastname }}</h5>
+                        <small></small>
+                    </div>
+
+                    <div>
+                        <p class="mb-1">{{ ls.city}}</p>
+                        <small>{{ ls.gender + ", " + ls.age + " ans - "}} Inscrit depuis le {{ ls.dateCreation }}</small>
+                        <p class="mb-2">{{ ls.description }}</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </a>
+    </div>
+</div>

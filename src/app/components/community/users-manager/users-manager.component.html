@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <!-- Breadcrumb -->
+    <app-breadcrumb [title]="title" [level1]="level1" [level2]="level2" ></app-breadcrumb>
+
+    <!-- Users filter form-->
+    <div [style.display]="isFormListVisible ? 'block' : 'none'">
+        <app-users-filter-form></app-users-filter-form>
+    </div>
+
+    <!-- Users list -->
+    <div [style.display]="isFormListVisible ? 'block' : 'none'">
+        <app-users-list (onNotifyShowUser)="notifyShowUser($event)">
+        </app-users-list>
+    </div>
+
+    <!-- User details -->
+    <div [style.display]="isUserVisible ? 'block' : 'none'">
+        <app-user-details [user]="user" (onNotifyHideUser)="notifyHideUSer($event)"></app-user-details>
+    </div>
+</div>

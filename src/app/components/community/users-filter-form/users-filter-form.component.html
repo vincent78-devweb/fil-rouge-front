@@ -1,0 +1,57 @@
+<form [formGroup]="filterForm" (ngSubmit)="filterUsers(filterForm.value)" class="container-fluid">
+
+    <!-- Form line 1 -->
+    <div class="form-row">
+        <!-- Gender selection -->
+        <div class="form-group col-md-4 input-group-sm">
+            <select class="form-control" formControlName="gender" id="inputGender">
+                <option value="" selected>Par Genre</option>
+                <option value="H">Homme</option>
+                <option value="F">Femme</option>
+            </select>
+        </div>
+
+        <!-- Age selection -->
+        <div class="form-group input-group-sm col-md-4">
+            <select class="form-control" formControlName="age" id="inputAge">
+                <option value="" selected>Par âge</option>
+                <option value="18-25">18-25 ans</option>
+                <option value="25-35">25-35 ans</option>
+                <option value="35-50">35-50 ans</option>
+                <option value="50-99">+ de 50 ans</option>
+            </select>
+        </div>
+
+        <!-- Username selection -->
+        <div class="form-group input-group-sm col-md-4">
+            <input type="text" formControlName="username" class="form-control align-middle" placeholder="Pseudo">
+        </div>
+
+    </div>
+
+    <!-- Form line 2 -->
+    <div class="form-row">
+
+        <!-- Region selection -->
+        <div class="form-group input-group-sm col-md-4">
+            <select class="form-control" formControlName="region" id="inputRegion">
+                <option value="" selected>Toutes les régions</option>
+            </select>
+        </div>
+
+        <!-- Departement selection -->
+        <div class="form-group input-group-sm col-md-4">
+            <select class="form-control" formControlName="departement" id="inputDpt">
+                <option value="" selected>Tous les départements</option>
+            </select>
+        </div>
+
+        <!-- Validate selection -->
+        <div class="form-group input-group-sm col-md-4">
+            <button type="submit" class="btn btn-primary btn-sm form-btn-search ml-0"
+                style="margin-top: 0px;">Rechercher</button>
+        </div>
+
+    </div>
+
+</form>

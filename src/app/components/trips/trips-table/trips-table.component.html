@@ -1,0 +1,27 @@
+<div [style.display]="isTripsListVisible ? 'block' : 'none'">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Début</th>
+        <th scope="col" class="th-selectable">Sortie</th>
+        <th scope="col" class="th-selectable">Inscrits</th>
+        <th scope="col" class="th-selectable">Organisateur</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody  *ngIf="trips !== undefined">
+        <tr *ngFor="let trip of trips">
+            <th scope="row">{{ trip.id }}</th>
+            <td>{{ trip.title }}</td>
+            <td>{{ trip.nbRegistration + " / " + trip.nbPersons }}</td>
+            <td>{{ trip.promoteur.firstname + " " + trip.promoteur.lastname }}</td>
+            <td><button type="button" class="btn btn-info btn-sm" (click)="displayTrip(trip)">Détails</button></td>
+        </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- Trip details -->
+<app-trip-details></app-trip-details>
