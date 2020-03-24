@@ -23,6 +23,7 @@ import { UsersFilterFormComponent } from './components/community/users-filter-fo
 import { UsersListComponent } from './components/community/users-list/users-list.component';
 import { UserDetailsComponent } from './components/community/user-details/user-details.component';
 import { BreadcrumbComponent } from './components/commons/breadcrumb/breadcrumb.component';
+import { MyPaginatorComponent } from './components/commons/my-paginator/my-paginator.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { BreadcrumbComponent } from './components/commons/breadcrumb/breadcrumb.
     UsersFilterFormComponent,
     UsersListComponent,
     UserDetailsComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    MyPaginatorComponent
   ],
   imports: [
     FormsModule,

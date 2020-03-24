@@ -5,7 +5,7 @@ export interface User {
     id: number,
     firstname: string,
     lastname: string,
-    pseudo: string, // Alias login in entity User
+    login: string, // Alias login in entity User
     email: string,
     avatar: string,
     description: string,

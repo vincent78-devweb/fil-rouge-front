@@ -1,20 +1,23 @@
 <div>
 
-    <h6> {{ users.length + " utilisateurs trouvés"}} </h6>
+    <h6> {{ pager.totalElements + " utilisateurs trouvés"}} </h6>
 
     <ul class="list-unstyled mt-3">
         <li *ngFor="let user of users" class="media">
             <img src="../../../../assets/10303-man-office-worker-light-skin-tone-icon.png" class="mr-3" alt="...">
             <div class="media-body">
-                <h5 class="mt-0 mb-1">List-based media object</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
-                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-                fringilla. Donec lacinia congue felis in faucibus.
+                <h5 class="mt-0 mb-1">{{ user.firstname + " " + user.lastname + " (" + user.login + ")" }}</h5>
+                <small>{{ "Habite à " + user.city.name }}</small>
+                <p>{{ user.description }}</p>
             </div>
             <button type="button" class="btn btn-info btn-sm" (click)="showUser(user)">Détails</button>
         </li>
     </ul>
 
     <!-- Paginator -->
+    <app-my-paginator 
+    [pagerParams]="pager" 
+    (notifyPagination)="onPaginate($event)"
+    ></app-my-paginator>
 </div>
 

@@ -4,6 +4,8 @@ import { Output, EventEmitter } from '@angular/core';
 import { UsersService } from '../../../services/users/users.service';
 import { User } from '../../../models/community/user';
 import { UserFilters } from '../../../models/community/user-filters';
+import { UsersListPager } from '../../../models/community/users-list-pager';
+import { PagerParams } from '../../../models/commons/pager-params';
 
 @Component({
   selector: 'app-users-list',
@@ -20,19 +22,30 @@ export class UsersListComponent implements OnInit {
   userFilters: UserFilters;
   users: User[] = [];
 
-  constructor( private usersService: UsersService ) { }
+  pager: PagerParams;
+
+  constructor( private usersService: UsersService ) { 
+    this.pager = {
+      currentPage: 0,
+      totalPages: 0,
+      pageTotalElements: 0,
+      totalElements: 0,
+      size: 0
+    };
+
+  }
 
   ngOnInit() {
     this.usersService.filterSubject.subscribe((filters: UserFilters) => {
 
       this.userFilters = filters;
 
-      this.paginate(filters, 1);
+      this.paginate(0);
     });
+  }
 
-    this.usersService.getUsers().subscribe(data => {
-      this.users = data;
-    });
+  onPaginate(pageNumber){
+    this.paginate(pageNumber);
   }
 
     /**
@@ -42,11 +55,22 @@ export class UsersListComponent implements OnInit {
    * @param pageNumber
    * @see https://jasonwatmore.com/post/2019/06/18/angular-8-simple-pagination-example 
    */
-  paginate(filters: UserFilters, pageNumber: number) {
-    pageNumber--;
+  paginate(pageNumber: number) {
+    this.usersService.filterUsers(this.userFilters.gender, this.userFilters.ageCategory, this.userFilters.pseudo, this.userFilters.regionId, this.userFilters.departmentId, pageNumber, 20, "login,asc").subscribe(data => {
+      const userListpager: UsersListPager = data;
+      this.users = data.content;
 
-    this.usersService.filterUsers(filters.gender, filters.ageCategory, filters.pseudo, filters.regionId, filters.departmentId, pageNumber, 20, "login,asc").subscribe(data => {
-      this.users = data;
+      let currentPager: PagerParams;
+      currentPager = {
+        currentPage : userListpager.number,
+        totalPages : userListpager.totalPages,
+        pageTotalElements : this.users.length,
+        totalElements : userListpager.totalElements,
+        size : userListpager.size
+      }
+
+      this.pager = currentPager;
+
     });
   }
 

@@ -13,7 +13,7 @@
 
         <!-- Age selection -->
         <div class="form-group input-group-sm col-md-4">
-            <select class="form-control" formControlName="age" id="inputAge">
+            <select class="form-control" formControlName="ageCategory" id="inputAgeCategory">
                 <option value="" selected>Par âge</option>
                 <option value="18-25">18-25 ans</option>
                 <option value="25-35">25-35 ans</option>
@@ -24,7 +24,7 @@
 
         <!-- Username selection -->
         <div class="form-group input-group-sm col-md-4">
-            <input type="text" formControlName="username" class="form-control align-middle" placeholder="Pseudo">
+            <input type="text" formControlName="pseudo" class="form-control align-middle" placeholder="Pseudo">
         </div>
 
     </div>
@@ -34,15 +34,17 @@
 
         <!-- Region selection -->
         <div class="form-group input-group-sm col-md-4">
-            <select class="form-control" formControlName="region" id="inputRegion">
+            <select class="form-control" formControlName="regionId" id="inputRegion" (change)="onChangeRegion($event.target.value)">
                 <option value="" selected>Toutes les régions</option>
+                <option *ngFor="let region of regions" [value]="region.id">{{ region.name }}</option>
             </select>
         </div>
 
         <!-- Departement selection -->
         <div class="form-group input-group-sm col-md-4">
-            <select class="form-control" formControlName="departement" id="inputDpt">
-                <option value="" selected>Tous les départements</option>
+            <select class="form-control" formControlName="departmentId" id="inputDpt">
+                <option value="0" selected>Tous les départements</option>
+                <option *ngFor="let departement of departments" [value]="departement.id">{{ departement.name }}</option>
             </select>
         </div>
 
