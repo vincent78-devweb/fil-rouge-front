@@ -1,1 +1,33 @@
-    <button type="button" class="btn btn-primary" (click)="hide()">Retour</button>
+    <ul class="list-unstyled mt-3">
+        <li class="media" *ngIf="user !== undefined">
+
+            <div class="media-body">
+                <h5 class="mt-0 mb-1">{{ user.firstname + " " + user.lastname + " (" + user.login + ")" }}</h5>
+
+                <dl class="dl-horizontal">
+                    <dt>Prénom</dt>
+                    <dd>{{ user.firstname }}</dd>
+                    <dt>Nom de famille </dt>
+                    <dd>{{ user.lastname }}</dd>
+                    <dt>Pseudo</dt>
+                    <dd>{{ user.login }}</dd>
+                    <dt>Age</dt>
+                    <dd> {{ user.age }}</dd>
+                    <dt>Commune</dt>
+                    <dd> {{ user.city.name }}</dd>
+                    <dt>Date de naissance</dt>
+                    <dd> {{ user.birthday }}</dd>
+                    <dt>Membre depuis</dt>
+                    <dd> {{ user.dateCreation }}</dd>
+                </dl>
+                <dl>
+                    <dt>Description</dt>
+                    <dd>{{ user.description }}</dd>
+                </dl>
+
+            </div>
+            <img src="../../../../assets/10303-man-office-worker-light-skin-tone-icon.png" style="width: 100px;" class="mr-3" alt="...">
+        </li>
+    </ul>
+
+    <button type="button" class="btn btn-primary btn-sm" (click)="hide()">Retour</button>

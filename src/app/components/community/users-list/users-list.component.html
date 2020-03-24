@@ -1,16 +1,21 @@
 <div>
 
-    <h6> {{ pager.totalElements + " utilisateurs trouvés"}} </h6>
+    <h5> {{ pager.totalElements + " utilisateurs trouvés"}} </h5>
 
-    <ul class="list-unstyled mt-3">
-        <li *ngFor="let user of users" class="media">
+    <ul class="list-group mt-3">
+        <li *ngFor="let user of users" class="list-group-item list-group-item-action ">
+            <div class="media">
             <img src="../../../../assets/10303-man-office-worker-light-skin-tone-icon.png" class="mr-3" alt="...">
             <div class="media-body">
                 <h5 class="mt-0 mb-1">{{ user.firstname + " " + user.lastname + " (" + user.login + ")" }}</h5>
-                <small>{{ "Habite à " + user.city.name }}</small>
-                <p>{{ user.description }}</p>
+                <p>{{ user.gender + ", " + user.age + " ans - "}} Inscrit depuis le
+                    {{ user.dateCreation }}
+                    <br/>
+                    {{ "Habite à " + user.city.name }}
+                </p>
+                    <button type="button" class="btn btn-info btn-sm" (click)="showUser(user)">Détails</button>
             </div>
-            <button type="button" class="btn btn-info btn-sm" (click)="showUser(user)">Détails</button>
+        </div>
         </li>
     </ul>
 

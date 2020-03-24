@@ -1,32 +1,35 @@
 <div class="container-fluid">
     <!-- Breadcrumb -->
-    <h6 class="card-title d-flex" style="margin-top: 20px;">La Communauté > Derniers inscrits</h6>
+    <app-breadcrumb [title]="title" [level1]="level1" [level2]="level2"></app-breadcrumb>
 
-    <div class="list-group">
-        <a *ngFor="let ls of lastSubscribes" class="list-group-item list-group-item-action">
-            <div class="d-flex justify-content-start">
+    <!-- User list -->
+    <div [style.display]="isListVisible ? 'block' : 'none'">
+        <h5> {{ pager.totalElements + " membres inscrits"}} </h5>
 
-                <!-- Partie gauche : photo du profil -->
-                <div style="width: 50px;height: 50px;">
-                    <img [src]="ls.avatar" />
-                </div>
-
-                <!-- Partie droite : Description du profil-->
-                <div>
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{ ls.firstname + " " + ls.lastname }}</h5>
-                        <small></small>
-                    </div>
-
-                    <div>
-                        <p class="mb-1">{{ ls.city}}</p>
-                        <small>{{ ls.gender + ", " + ls.age + " ans - "}} Inscrit depuis le {{ ls.dateCreation }}</small>
-                        <p class="mb-2">{{ ls.description }}</p>
+        <ul class="list-group mt-3">
+            <li *ngFor="let user of users" class="list-group-item list-group-item-action ">
+                <div class="media">
+                    <img src="../../../../assets/10303-man-office-worker-light-skin-tone-icon.png" class="mr-3"
+                        alt="...">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">{{ user.firstname + " " + user.lastname + " (" + user.login + ")" }}</h5>
+                        <p>{{ "Habite à " + user.city.name }}
+                            <br />
+                            {{ user.gender + ", " + user.age + " ans - "}} Inscrit depuis le
+                            {{ user.dateCreation }}</p>
+                        <button type="button" class="btn btn-info btn-sm" (click)="showUser(user)">Détails</button>
                     </div>
                 </div>
+            </li>
+        </ul>
 
-            </div>
-
-        </a>
+        <!-- Paginator -->
+        <app-my-paginator [pagerParams]="pager" (notifyPagination)="onPaginate($event)"></app-my-paginator>
     </div>
+
+    <!-- User details -->
+    <div [style.display]="isUserVisible ? 'block' : 'none'">
+        <app-user-details [user]="user" (onNotifyHideUser)="notifyHideUSer($event)"></app-user-details>
+    </div>
+
 </div>
