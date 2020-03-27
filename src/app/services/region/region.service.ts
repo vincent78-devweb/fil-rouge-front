@@ -3,18 +3,16 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { of, Observable, Subject, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { Poi } from '../../models/commons/poi';
-
-import {Region} from '../../models/zone/region';
+import { Region } from '../../models/zone/region';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PoisService {
+export class RegionService {
 
   constructor(private http: HttpClient) { }
 
-  public getPois(): Observable<Poi[]> {
-    return this.http.get<Poi[]>("http://localhost:8080/api/pois");
+  public getRegions(): Observable<Region[]> {
+    return this.http.get<Region[]>("http://localhost:8080/api/regions");
   }
 }

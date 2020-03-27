@@ -3,8 +3,8 @@ import { FormBuilder } from '@angular/forms';
 
 import { UsersService } from '../../../services/users/users.service';
 import { TripsService } from '../../../services/trips/trips.service';
-import { Region } from '../../../models/trips/region';
-import { Department } from '../../../models/trips/department';
+import { Region } from '../../../models/zone/region';
+import { Department } from '../../../models/zone/department';
 
 @Component({
   selector: 'app-users-filter-form',
@@ -22,11 +22,11 @@ export class UsersFilterFormComponent implements OnInit {
   regions: Region[];
   departments: Department[];
 
-  constructor( 
+  constructor(
     private usersService: UsersService,
     private tripsService: TripsService,
-    private formBuilder: FormBuilder) 
-    { 
+    private formBuilder: FormBuilder)
+    {
       this.filterForm = this.formBuilder.group({
         gender: '',
         ageCategory: '',
@@ -48,8 +48,8 @@ export class UsersFilterFormComponent implements OnInit {
 
   /**
    * Update Department combo box if the selected region changes
-   * 
-   * @param regionId 
+   *
+   * @param regionId
    */
   onChangeRegion(regionId: number) {
     if(regionId == 0){
@@ -68,8 +68,8 @@ export class UsersFilterFormComponent implements OnInit {
 
   /**
    * User filter form submission
-   * 
-   * @param userFilters 
+   *
+   * @param userFilters
    */
   filterUsers(userFilters) {
     if(userFilters.gender === undefined)

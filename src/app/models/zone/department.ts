@@ -1,4 +1,4 @@
-import { Region } from '../trips/region';
+import { Region } from './region';
 
 export interface Department {
     id: number,

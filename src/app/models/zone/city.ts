@@ -1,4 +1,4 @@
-import { Department } from '../trips/department';
+import { Department } from './department';
 
 export interface City {
     id: number,

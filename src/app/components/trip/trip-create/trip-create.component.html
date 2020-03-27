@@ -1,208 +1,436 @@
 <div class="container-fluid">
-    <!-- Breadcrumb -->
-    <h6 class="card-title d-flex" style="margin-top: 20px;">Sortir > Créer une sortie</h6>
+  <!-- Breadcrumb -->
+  <h6 class="card-title d-flex" style="margin-top: 20px;">Sortir > Créer une sortie</h6>
+  <form [formGroup]="tripForm" (ngSubmit)="saveTrip()" class="form-horizontal" id="form-event" name="formevent"
+        action="" enctype="multipart/form-data"
+        autocomplete="off">
 
-    <form class="form-horizontal" id="form-event" name="formevent" action="" method="post" enctype="multipart/form-data" autocomplete="off">
+    <div class="form-group">
+
+      <!-- POI -->
+      <div class="col-xs-4">
+        <select class="form-control" formControlName="poiId" id="inputPoI">
+          <option value="" selected>Toutes les types</option>
+          <option *ngFor="let poi of pois" [value]="poi.id">{{ poi.name }}</option>
+        </select>
+      </div>
+
+      <!-- Region selection -->
+      <div class="col-xs-4">
+        <select class="form-control" formControlName="regionId" id="inputRegion"
+                (change)="onChangeRegion($event.target.value)">
+          <option value="" selected>Toutes les régions</option>
+          <option *ngFor="let region of regions" [value]="region.id">{{ region.name }}</option>
+        </select>
+      </div>
+
+      <!-- Departement selection -->
+      <div class="col-xs-4">
+        <select class="form-control" formControlName="departmentId" id="inputDpt">
+          <option value="0" selected>Tous les départements</option>
+          <option *ngFor="let departement of departments" [value]="departement.id">{{ departement.name }}</option>
+        </select>
+      </div>
+
+      <!--     &lt;!&ndash; City selection &ndash;&gt;
+           <div class="col-xs-4">
+             <select class="form-control" formControlName="cityId" id="inputDpt">
+               <option value="0" selected>Tous les départements</option>
+               <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
+             </select>
+           </div>-->
+
+
+      <div class="col-xs-8">
+        <input type="text" name="event_title" id="event_title" value="" class="form-control"
+               placeholder="Intitulé de la sortie" maxlength="160" required="required">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-4">
+        <img alt="" width="200" height="200" src="https://www.toutpoursortir.fr/images/events/nopic-200x200.jpeg"
+             class="img-rounded" itemprop="photo"> <br><br>
+
+        <input type="hidden" name="event_picture" value="" id="event_picture">
+
+        <input type="hidden" name="MAX_FILE_SIZE" value="2097152" id="MAX_FILE_SIZE">
+        <input type="file" name="image" id="image" class="form-control">
+        <i class="description">Image limitée à 8 Mo</i></div>
+      <div class="col-xs-8">
         <div class="form-group">
-            <div class="col-xs-4">
-                
-    <select name="event_type" id="event_type" class="form-control" required="required">
-        <option value="">Type de sortie</option>
-        <option value="drink">Boire un verre</option>
-        <option value="culture">Culture</option>
-        <option value="dance">Danser</option>
-        <option value="discover">Découverte</option>
-        <option value="relax">Détente</option>
-        <option value="movie">Film</option>
-        <option value="game">Jouer</option>
-        <option value="music">Musique</option>
-        <option value="picnic">Picnic</option>
-        <option value="outdoor">Plein air</option>
-        <option value="meal">Resto</option>
-        <option value="stay">Séjour</option>
-        <option value="spectacle">Spectacle</option>
-        <option value="sport">Sport</option>
-    </select>		</div>
-            <div class="col-xs-8">
-                
-    <input type="text" name="event_title" id="event_title" value="" class="form-control" placeholder="Intitulé de la sortie" maxlength="160" required="required">		</div>
+          <label for="user_name" class="col-xs-4 control-label">Organisateur</label>
+          <div class="col-xs-8">
+
+            <select name="user_id" id="user_id" class="form-control" required="required">
+              <option value="14154" selected="selected">twentycents</option>
+            </select></div>
         </div>
-        
         <div class="form-group">
-            <div class="col-xs-4">
-                <img alt="" width="200" height="200" src="https://www.toutpoursortir.fr/images/events/nopic-200x200.jpeg" class="img-rounded" itemprop="photo">			<br><br>
-                
-    <input type="hidden" name="event_picture" value="" id="event_picture">			
-    
-    <input type="hidden" name="MAX_FILE_SIZE" value="2097152" id="MAX_FILE_SIZE">
-    <input type="file" name="image" id="image" class="form-control">
-    <i class="description">Image limitée à 8 Mo</i>		</div>
-            <div class="col-xs-8">
-                <div class="form-group">
-                    <label for="user_name" class="col-xs-4 control-label">Organisateur</label>
-                    <div class="col-xs-8">
-                        
-    <select name="user_id" id="user_id" class="form-control" required="required">
-        <option value="14154" selected="selected">twentycents</option>
-    </select>				</div>
-                </div>
-                <div class="form-group">
-                    <label for="event_contact" class="col-xs-4 control-label">Téléphone</label>
-                    <div class="col-xs-8">
-                        
-    <input type="text" name="event_contact" id="event_contact" value="" class="form-control" maxlength="15">				</div>
-                </div>
-                <div class="form-group">
-                    <label for="user_name" class="col-xs-4 control-label">Visible par</label>
-                    <div class="col-xs-8">
-                        
-    <select name="event_opento" id="event_opento" class="form-control" required="required">
-        <option value="public" selected="selected">Tout le monde</option>
-        <option value="friends">Mes amis</option>
-    </select>				</div>
-                </div>
-                <div class="form-group">
-                    <label for="user_name" class="col-xs-4 control-label">Participants max</label>
-                    <div class="col-xs-8">
-                        
-    <select name="event_maxparticipants" id="event_maxparticipants" required="required" class="form-control">
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10" selected="selected">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-    </select>				</div>
-                </div>
-                <div class="form-group">
-                    <label for="zone_id" class="col-xs-4 control-label">Ville</label>
-                    <div class="col-xs-8">
-                        
-    <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" name="city" id="city" value="" class="form-control ui-autocomplete-input" required="required" autocomplete="off">
-    <i class="description">Tape les premières lettres puis choisis la bonne ville</i><br>
-                        
-    <input type="hidden" name="zone_id" value="0" id="zone_id">				</div>
-                </div>
-            </div>
+          <label for="event_contact" class="col-xs-4 control-label">Téléphone</label>
+          <div class="col-xs-8">
+
+            <input type="text" name="event_contact" id="event_contact" value="" class="form-control" maxlength="15">
+          </div>
         </div>
-        
-        <h3><span class="glyphicon glyphicon-info-sign"></span> Description de la sortie</h3>
         <div class="form-group">
-            <div class="col-xs-4">
-                
-    <input type="hidden" name="event_free" value="0"><input type="checkbox" name="event_free" id="event_free" value="1" checked="checked">
-    <label for="event_free" class="optional">Sortie gratuite</label>		</div>
-            <div class="col-xs-4">
-                
-    <input type="hidden" name="event_children" value="0"><input type="checkbox" name="event_children" id="event_children" value="1">
-    <label for="event_children" class="optional">Enfants acceptés</label>		</div>
-            <div class="col-xs-4">
-                
-    <input type="hidden" name="event_handicap" value="0"><input type="checkbox" name="event_handicap" id="event_handicap" value="1">
-    <label for="event_handicap" class="optional">Accessible aux handicapés</label>		</div>
-            <div class="col-xs-12">
-                
-    <textarea name="event_description" id="event_description" class="wysiwyg form-control" rows="20" cols="80" aria-hidden="true" style="display: none;"></textarea><span role="application" aria-labelledby="event_description_voice" id="event_description_parent" class="mceEditor defaultSkin"><span class="mceVoiceLabel" style="display:none;" id="event_description_voice">Texte riche</span><table role="presentation" id="event_description_tbl" class="mceLayout" cellspacing="0" cellpadding="0" style="width: 729px; height: 414px;"><tbody><tr role="presentation" class="mceFirst"><td class="mceToolbar mceLeft mceFirst mceLast" role="toolbar"><div id="event_description_toolbargroup" role="group" aria-labelledby="event_description_toolbargroup_voice" tabindex="-1"><span role="application"><span id="event_description_toolbargroup_voice" class="mceVoiceLabel" style="display:none;">Barre d'outils</span><table id="event_description_toolbar1" class="mceToolbar mceToolbarRow1 Enabled" cellpadding="0" cellspacing="0" align="" role="presentation" tabindex="-1" aria-disabled="false" aria-pressed="false"><tbody><tr><td class="mceToolbarStart mceToolbarStartButton mceFirst"><span><!-- IE --></span></td><td style="position: relative"><a role="button" id="event_description_bold" href="javascript:;" class="mceButton mceButtonEnabled mce_bold" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_bold_voice" title="Gras (Ctrl+B)" tabindex="-1"><span class="mceIcon mce_bold"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_bold_voice">Gras (Ctrl+B)</span></a></td><td style="position: relative"><a role="button" id="event_description_italic" href="javascript:;" class="mceButton mceButtonEnabled mce_italic" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_italic_voice" title="Italique (Ctrl+I)" tabindex="-1"><span class="mceIcon mce_italic"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_italic_voice">Italique (Ctrl+I)</span></a></td><td style="position: relative"><a role="button" id="event_description_underline" href="javascript:;" class="mceButton mceButtonEnabled mce_underline" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_underline_voice" title="Souligné (Ctrl+U)" tabindex="-1"><span class="mceIcon mce_underline"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_underline_voice">Souligné (Ctrl+U)</span></a></td><td style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical" tabindex="-1"></span></td><td style="position: relative"><a role="button" id="event_description_justifyleft" href="javascript:;" class="mceButton mceButtonEnabled mce_justifyleft" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_justifyleft_voice" title="Aligné à gauche" tabindex="-1"><span class="mceIcon mce_justifyleft"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_justifyleft_voice">Aligné à gauche</span></a></td><td style="position: relative"><a role="button" id="event_description_justifycenter" href="javascript:;" class="mceButton mceButtonEnabled mce_justifycenter" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_justifycenter_voice" title="Centré" tabindex="-1"><span class="mceIcon mce_justifycenter"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_justifycenter_voice">Centré</span></a></td><td style="position: relative"><a role="button" id="event_description_justifyright" href="javascript:;" class="mceButton mceButtonEnabled mce_justifyright" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_justifyright_voice" title="Aligné à droite" tabindex="-1"><span class="mceIcon mce_justifyright"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_justifyright_voice">Aligné à droite</span></a></td><td style="position: relative"><a role="button" id="event_description_justifyfull" href="javascript:;" class="mceButton mceButtonEnabled mce_justifyfull" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_justifyfull_voice" title="Justifié" tabindex="-1"><span class="mceIcon mce_justifyfull"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_justifyfull_voice">Justifié</span></a></td><td style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical" tabindex="-1"></span></td><td style="position: relative"><a role="button" id="event_description_bullist" href="javascript:;" class="mceButton mceButtonEnabled mce_bullist" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_bullist_voice" title="Liste à puces" tabindex="-1" aria-pressed="false"><span class="mceIcon mce_bullist"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_bullist_voice">Liste à puces</span></a></td><td style="position: relative"><a role="button" id="event_description_numlist" href="javascript:;" class="mceButton mceButtonEnabled mce_numlist" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_numlist_voice" title="Liste numérotée" tabindex="-1" aria-pressed="false"><span class="mceIcon mce_numlist"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_numlist_voice">Liste numérotée</span></a></td><td style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical" tabindex="-1"></span></td><td style="position: relative"><span role="listbox" aria-haspopup="true" aria-labelledby="event_description_fontsizeselect_voiceDesc" aria-describedby="event_description_fontsizeselect_voiceDesc"><table role="presentation" tabindex="-1" id="event_description_fontsizeselect" cellpadding="0" cellspacing="0" class="mceListBox mceListBoxEnabled mce_fontsizeselect" aria-valuenow="Taille police"><tbody><tr><td class="mceFirst"><span id="event_description_fontsizeselect_voiceDesc" class="voiceLabel" style="display:none;">Taille police</span><a id="event_description_fontsizeselect_text" tabindex="-1" href="javascript:;" class="mceText mceTitle" onclick="return false;" onmousedown="return false;">Taille police</a></td><td class="mceLast"><a id="event_description_fontsizeselect_open" tabindex="-1" href="javascript:;" class="mceOpen" onclick="return false;" onmousedown="return false;"><span><span style="display:none;" class="mceIconOnly" aria-hidden="true">▼</span></span></a></td></tr></tbody></table></span></td><td class="mceToolbarStart"><span><!-- IE --></span></td><td style="position: relative"><div id="event_description_forecolor" role="button" tabindex="-1" aria-labelledby="event_description_forecolor_voice" aria-haspopup="true"><table role="presentation" class="mceSplitButton mceSplitButtonEnabled mce_forecolor" cellpadding="0" cellspacing="0" title="Choisir la couleur du texte"><tbody><tr><td class="mceFirst"><a role="button" id="event_description_forecolor_action" tabindex="-1" href="javascript:;" class="mceAction mce_forecolor" onclick="return false;" onmousedown="return false;" title="Choisir la couleur du texte"><span class="mceAction mce_forecolor"></span><span class="mceVoiceLabel mceIconOnly" id="event_description_forecolor_voice" style="display:none;">Choisir la couleur du texte</span><div id="event_description_forecolor_preview" class="mceColorPreview" style="background-color: rgb(136, 136, 136);"></div></a></td><td class="mceLast"><a role="button" id="event_description_forecolor_open" tabindex="-1" href="javascript:;" class="mceOpen mce_forecolor" onclick="return false;" onmousedown="return false;" title="Choisir la couleur du texte"><span class="mceOpen mce_forecolor"><span style="display:none;" class="mceIconOnly" aria-hidden="true">▼</span></span></a></td></tr></tbody></table></div></td><td style="position: relative"><div id="event_description_backcolor" role="button" tabindex="-1" aria-labelledby="event_description_backcolor_voice" aria-haspopup="true"><table role="presentation" class="mceSplitButton mceSplitButtonEnabled mce_backcolor" cellpadding="0" cellspacing="0" title="Choisir la couleur de surlignage"><tbody><tr><td class="mceFirst"><a role="button" id="event_description_backcolor_action" tabindex="-1" href="javascript:;" class="mceAction mce_backcolor" onclick="return false;" onmousedown="return false;" title="Choisir la couleur de surlignage"><span class="mceAction mce_backcolor"></span><span class="mceVoiceLabel mceIconOnly" id="event_description_backcolor_voice" style="display:none;">Choisir la couleur de surlignage</span><div id="event_description_backcolor_preview" class="mceColorPreview" style="background-color: rgb(136, 136, 136);"></div></a></td><td class="mceLast"><a role="button" id="event_description_backcolor_open" tabindex="-1" href="javascript:;" class="mceOpen mce_backcolor" onclick="return false;" onmousedown="return false;" title="Choisir la couleur de surlignage"><span class="mceOpen mce_backcolor"><span style="display:none;" class="mceIconOnly" aria-hidden="true">▼</span></span></a></td></tr></tbody></table></div></td><td style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical" tabindex="-1"></span></td><td style="position: relative"><a role="button" id="event_description_link" href="javascript:;" class="mceButton mce_link mceButtonDisabled" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_link_voice" title="Insérer / éditer un lien" tabindex="-1" aria-disabled="true"><span class="mceIcon mce_link"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_link_voice">Insérer / éditer un lien</span></a></td><td style="position: relative"><a role="button" id="event_description_unlink" href="javascript:;" class="mceButton mce_unlink mceButtonDisabled" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_unlink_voice" title="Supprimer le lien" tabindex="-1" aria-disabled="true"><span class="mceIcon mce_unlink"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_unlink_voice">Supprimer le lien</span></a></td><td style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical" tabindex="-1"></span></td><td style="position: relative"><a role="button" id="event_description_image" href="javascript:;" class="mceButton mceButtonEnabled mce_image" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_image_voice" title="Insérer / éditer une image" tabindex="-1"><span class="mceIcon mce_image"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_image_voice">Insérer / éditer une image</span></a></td><td style="position: relative"><a role="button" id="event_description_media" href="javascript:;" class="mceButton mceButtonEnabled mce_media" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_media_voice" title="Insérer / éditer un média incorporé" tabindex="-1"><span class="mceIcon mce_media"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_media_voice">Insérer / éditer un média incorporé</span></a></td><td style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical" tabindex="-1"></span></td><td style="position: relative"><a role="button" id="event_description_code" href="javascript:;" class="mceButton mceButtonEnabled mce_code" onmousedown="return false;" onclick="return false;" aria-labelledby="event_description_code_voice" title="Éditer le code source HTML" tabindex="-1"><span class="mceIcon mce_code"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_code_voice">Éditer le code source HTML</span></a></td><td class="mceToolbarEnd mceToolbarEndButton mceLast"><span><!-- IE --></span></td></tr></tbody></table></span></div><a href="#" accesskey="z" title="Atteindre les boutons de l'éditeur - Alt+Q, Aller à l'éditeur - Alt-Z, Aller au chemin de l'élément - Alt-X" onfocus="tinyMCE.getInstanceById('event_description').focus();"><!-- IE --></a></td></tr><tr class="mceLast"><td class="mceIframeContainer mceFirst mceLast"><iframe id="event_description_ifr" src="javascript:&quot;&quot;" frameborder="0" allowtransparency="true" title="Texte richeFaites ALT-F10 pour accéder à la barre d'outils. Faites ALT-0 pour accéder à l'aide" style="width: 100%; height: 391px; display: block;"></iframe></td></tr></tbody></table></span>		</div>
+          <label for="user_name" class="col-xs-4 control-label">Visible par</label>
+          <div class="col-xs-8">
+
+            <select name="event_opento" id="event_opento" class="form-control" required="required">
+              <option value="public" selected="selected">Tout le monde</option>
+              <option value="friends">Mes amis</option>
+            </select></div>
         </div>
-        
-        <div class="row">
-            <div class="col-xs-6">
-                <h3><span class="glyphicon glyphicon-time"></span> Lieu et heures de la sortie</h3>
-                <div class="form-group">
-                    <label for="event_date" class="col-xs-5 control-label">Date de sortie</label>
-                    <div class="col-xs-7">
-                        
-    <input type="text" name="event_date" id="event_date" value="" class="form-control date hasDatepicker" format="dd/MM/yyyy" step="1" required="required" placeholder="JJ/MM/AAAA">				</div>
-                </div>
-                <div class="form-group">
-                    <label for="event_start" class="col-xs-5 control-label">Heure de début</label>
-                    <div class="col-xs-7">
-                        
-    <input type="text" name="event_start" id="event_start" value="" class="form-control time" step="15" required="required" placeholder="HH:MM">				</div>
-                </div>
-                <div class="form-group">
-                    <label for="event_end" class="col-xs-5 control-label">Heure de fin</label>
-                    <div class="col-xs-7">
-                        
-    <input type="text" name="event_end" id="event_end" value="" class="form-control time" placeholder="HH:MM" step="15">				</div>
-                </div>
-                <div class="form-group">
-                    <label for="user_name" class="col-xs-5 control-label">Désinscription</label>
-                    <div class="col-xs-7">
-                        
-    <select name="event_openuntil" id="event_openuntil" class="form-control" required="required">
-        <option value="0" selected="selected">jusqu'à l'heure de la sortie</option>
-        <option value="1">1 heure avant la sortie</option>
-        <option value="2">2 heures avant la sortie</option>
-        <option value="3">3 heures avant la sortie</option>
-        <option value="4">4 heures avant la sortie</option>
-        <option value="6">6 heures avant la sortie</option>
-        <option value="12">12 heures avant la sortie</option>
-        <option value="24">24 heures avant la sortie</option>
-        <option value="48">2 jours avant la sortie</option>
-        <option value="168">1 semaine avant la sortie</option>
-        <option value="336">2 semaines avant la sortie</option>
-    </select>				</div>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <br><br>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <label for="event_address" class="control-label">Adresse exacte de la sortie</label>
-                        
-    <textarea name="event_address" id="event_address" class="form-control" rows="3" maxlength="100" required="required" cols="80"></textarea>				</div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <label for="event_meetingpoint" class="control-label">Point de rendez-vous</label>
-                        
-    <textarea name="event_meetingpoint" id="event_meetingpoint" class="form-control" rows="3" maxlength="100" cols="80"></textarea>				</div>
-                </div>
-            </div>
-        </div>
-        
-        <h3><span class="glyphicon glyphicon-send"></span> Invite tes amis à sortir</h3>
         <div class="form-group">
-            <div class="col-xs-12">
-                
-    <div id="notif">
-        <div id="notif-who">
+          <label for="user_name" class="col-xs-4 control-label">Participants max</label>
+          <div class="col-xs-8">
+
+            <select name="event_maxparticipants" id="event_maxparticipants" required="required" class="form-control">
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10" selected="selected">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+            </select></div>
+        </div>
+        <div class="form-group">
+          <label for="zone_id" class="col-xs-4 control-label">Ville</label>
+          <div class="col-xs-8">
+
+            <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text"
+                                                                                                     name="city"
+                                                                                                     id="city" value=""
+                                                                                                     class="form-control ui-autocomplete-input"
+                                                                                                     required="required"
+                                                                                                     autocomplete="off">
+            <i class="description">Tape les premières lettres puis choisis la bonne ville</i><br>
+
+            <input type="hidden" name="zone_id" value="0" id="zone_id"></div>
+        </div>
+      </div>
+    </div>
+
+    <h3><span class="glyphicon glyphicon-info-sign"></span> Description de la sortie</h3>
+    <div class="form-group">
+      <div class="col-xs-4">
+
+        <input type="hidden" name="event_free" value="0"><input type="checkbox" name="event_free" id="event_free"
+                                                                value="1" checked="checked">
+        <label for="event_free" class="optional">Sortie gratuite</label></div>
+      <div class="col-xs-4">
+
+        <input type="hidden" name="event_children" value="0"><input type="checkbox" name="event_children"
+                                                                    id="event_children" value="1">
+        <label for="event_children" class="optional">Enfants acceptés</label></div>
+      <div class="col-xs-4">
+
+        <input type="hidden" name="event_handicap" value="0"><input type="checkbox" name="event_handicap"
+                                                                    id="event_handicap" value="1">
+        <label for="event_handicap" class="optional">Accessible aux handicapés</label></div>
+      <div class="col-xs-12">
+
+        <textarea name="event_description" id="event_description" class="wysiwyg form-control" rows="20" cols="80"
+                  aria-hidden="true" style="display: none;"></textarea><span role="application"
+                                                                             aria-labelledby="event_description_voice"
+                                                                             id="event_description_parent"
+                                                                             class="mceEditor defaultSkin"><span
+        class="mceVoiceLabel" style="display:none;" id="event_description_voice">Texte riche</span><table
+        role="presentation" id="event_description_tbl" class="mceLayout" cellspacing="0" cellpadding="0"
+        style="width: 729px; height: 414px;"><tbody><tr role="presentation" class="mceFirst"><td
+        class="mceToolbar mceLeft mceFirst mceLast" role="toolbar"><div id="event_description_toolbargroup" role="group"
+                                                                        aria-labelledby="event_description_toolbargroup_voice"
+                                                                        tabindex="-1"><span role="application"><span
+        id="event_description_toolbargroup_voice" class="mceVoiceLabel" style="display:none;">Barre d'outils</span><table
+        id="event_description_toolbar1" class="mceToolbar mceToolbarRow1 Enabled" cellpadding="0" cellspacing="0"
+        align="" role="presentation" tabindex="-1" aria-disabled="false" aria-pressed="false"><tbody><tr><td
+        class="mceToolbarStart mceToolbarStartButton mceFirst"><span><!-- IE --></span></td><td
+        style="position: relative"><a role="button" id="event_description_bold" href="javascript:;"
+                                      class="mceButton mceButtonEnabled mce_bold" onmousedown="return false;"
+                                      onclick="return false;" aria-labelledby="event_description_bold_voice"
+                                      title="Gras (Ctrl+B)" tabindex="-1"><span class="mceIcon mce_bold"></span><span
+        class="mceVoiceLabel mceIconOnly" style="display: none;" id="event_description_bold_voice">Gras (Ctrl+B)</span></a></td><td
+        style="position: relative"><a role="button" id="event_description_italic" href="javascript:;"
+                                      class="mceButton mceButtonEnabled mce_italic" onmousedown="return false;"
+                                      onclick="return false;" aria-labelledby="event_description_italic_voice"
+                                      title="Italique (Ctrl+I)" tabindex="-1"><span
+        class="mceIcon mce_italic"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;"
+                                                id="event_description_italic_voice">Italique (Ctrl+I)</span></a></td><td
+        style="position: relative"><a role="button" id="event_description_underline" href="javascript:;"
+                                      class="mceButton mceButtonEnabled mce_underline" onmousedown="return false;"
+                                      onclick="return false;" aria-labelledby="event_description_underline_voice"
+                                      title="Souligné (Ctrl+U)" tabindex="-1"><span
+        class="mceIcon mce_underline"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;"
+                                                   id="event_description_underline_voice">Souligné (Ctrl+U)</span></a></td><td
+        style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical"
+                                         tabindex="-1"></span></td><td style="position: relative"><a role="button"
+                                                                                                     id="event_description_justifyleft"
+                                                                                                     href="javascript:;"
+                                                                                                     class="mceButton mceButtonEnabled mce_justifyleft"
+                                                                                                     onmousedown="return false;"
+                                                                                                     onclick="return false;"
+                                                                                                     aria-labelledby="event_description_justifyleft_voice"
+                                                                                                     title="Aligné à gauche"
+                                                                                                     tabindex="-1"><span
+        class="mceIcon mce_justifyleft"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;"
+                                                     id="event_description_justifyleft_voice">Aligné à gauche</span></a></td><td
+        style="position: relative"><a role="button" id="event_description_justifycenter" href="javascript:;"
+                                      class="mceButton mceButtonEnabled mce_justifycenter" onmousedown="return false;"
+                                      onclick="return false;" aria-labelledby="event_description_justifycenter_voice"
+                                      title="Centré" tabindex="-1"><span class="mceIcon mce_justifycenter"></span><span
+        class="mceVoiceLabel mceIconOnly" style="display: none;"
+        id="event_description_justifycenter_voice">Centré</span></a></td><td style="position: relative"><a role="button"
+                                                                                                           id="event_description_justifyright"
+                                                                                                           href="javascript:;"
+                                                                                                           class="mceButton mceButtonEnabled mce_justifyright"
+                                                                                                           onmousedown="return false;"
+                                                                                                           onclick="return false;"
+                                                                                                           aria-labelledby="event_description_justifyright_voice"
+                                                                                                           title="Aligné à droite"
+                                                                                                           tabindex="-1"><span
+        class="mceIcon mce_justifyright"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;"
+                                                      id="event_description_justifyright_voice">Aligné à droite</span></a></td><td
+        style="position: relative"><a role="button" id="event_description_justifyfull" href="javascript:;"
+                                      class="mceButton mceButtonEnabled mce_justifyfull" onmousedown="return false;"
+                                      onclick="return false;" aria-labelledby="event_description_justifyfull_voice"
+                                      title="Justifié" tabindex="-1"><span class="mceIcon mce_justifyfull"></span><span
+        class="mceVoiceLabel mceIconOnly" style="display: none;"
+        id="event_description_justifyfull_voice">Justifié</span></a></td><td style="position: relative"><span
+        class="mceSeparator" role="separator" aria-orientation="vertical" tabindex="-1"></span></td><td
+        style="position: relative"><a role="button" id="event_description_bullist" href="javascript:;"
+                                      class="mceButton mceButtonEnabled mce_bullist" onmousedown="return false;"
+                                      onclick="return false;" aria-labelledby="event_description_bullist_voice"
+                                      title="Liste à puces" tabindex="-1" aria-pressed="false"><span
+        class="mceIcon mce_bullist"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;"
+                                                 id="event_description_bullist_voice">Liste à puces</span></a></td><td
+        style="position: relative"><a role="button" id="event_description_numlist" href="javascript:;"
+                                      class="mceButton mceButtonEnabled mce_numlist" onmousedown="return false;"
+                                      onclick="return false;" aria-labelledby="event_description_numlist_voice"
+                                      title="Liste numérotée" tabindex="-1" aria-pressed="false"><span
+        class="mceIcon mce_numlist"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;"
+                                                 id="event_description_numlist_voice">Liste numérotée</span></a></td><td
+        style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical"
+                                         tabindex="-1"></span></td><td style="position: relative"><span role="listbox"
+                                                                                                        aria-haspopup="true"
+                                                                                                        aria-labelledby="event_description_fontsizeselect_voiceDesc"
+                                                                                                        aria-describedby="event_description_fontsizeselect_voiceDesc"><table
+        role="presentation" tabindex="-1" id="event_description_fontsizeselect" cellpadding="0" cellspacing="0"
+        class="mceListBox mceListBoxEnabled mce_fontsizeselect" aria-valuenow="Taille police"><tbody><tr><td
+        class="mceFirst"><span id="event_description_fontsizeselect_voiceDesc" class="voiceLabel" style="display:none;">Taille police</span><a
+        id="event_description_fontsizeselect_text" tabindex="-1" href="javascript:;" class="mceText mceTitle"
+        onclick="return false;" onmousedown="return false;">Taille police</a></td><td class="mceLast"><a
+        id="event_description_fontsizeselect_open" tabindex="-1" href="javascript:;" class="mceOpen"
+        onclick="return false;" onmousedown="return false;"><span><span style="display:none;" class="mceIconOnly"
+                                                                        aria-hidden="true">▼</span></span></a></td></tr></tbody></table></span></td><td
+        class="mceToolbarStart"><span><!-- IE --></span></td><td style="position: relative"><div
+        id="event_description_forecolor" role="button" tabindex="-1" aria-labelledby="event_description_forecolor_voice"
+        aria-haspopup="true"><table role="presentation" class="mceSplitButton mceSplitButtonEnabled mce_forecolor"
+                                    cellpadding="0" cellspacing="0" title="Choisir la couleur du texte"><tbody><tr><td
+        class="mceFirst"><a role="button" id="event_description_forecolor_action" tabindex="-1" href="javascript:;"
+                            class="mceAction mce_forecolor" onclick="return false;" onmousedown="return false;"
+                            title="Choisir la couleur du texte"><span class="mceAction mce_forecolor"></span><span
+        class="mceVoiceLabel mceIconOnly" id="event_description_forecolor_voice" style="display:none;">Choisir la couleur du texte</span><div
+        id="event_description_forecolor_preview" class="mceColorPreview"
+        style="background-color: rgb(136, 136, 136);"></div></a></td><td class="mceLast"><a role="button"
+                                                                                            id="event_description_forecolor_open"
+                                                                                            tabindex="-1"
+                                                                                            href="javascript:;"
+                                                                                            class="mceOpen mce_forecolor"
+                                                                                            onclick="return false;"
+                                                                                            onmousedown="return false;"
+                                                                                            title="Choisir la couleur du texte"><span
+        class="mceOpen mce_forecolor"><span style="display:none;" class="mceIconOnly" aria-hidden="true">▼</span></span></a></td></tr></tbody></table></div></td><td
+        style="position: relative"><div id="event_description_backcolor" role="button" tabindex="-1"
+                                        aria-labelledby="event_description_backcolor_voice" aria-haspopup="true"><table
+        role="presentation" class="mceSplitButton mceSplitButtonEnabled mce_backcolor" cellpadding="0" cellspacing="0"
+        title="Choisir la couleur de surlignage"><tbody><tr><td class="mceFirst"><a role="button"
+                                                                                    id="event_description_backcolor_action"
+                                                                                    tabindex="-1" href="javascript:;"
+                                                                                    class="mceAction mce_backcolor"
+                                                                                    onclick="return false;"
+                                                                                    onmousedown="return false;"
+                                                                                    title="Choisir la couleur de surlignage"><span
+        class="mceAction mce_backcolor"></span><span class="mceVoiceLabel mceIconOnly"
+                                                     id="event_description_backcolor_voice" style="display:none;">Choisir la couleur de surlignage</span><div
+        id="event_description_backcolor_preview" class="mceColorPreview"
+        style="background-color: rgb(136, 136, 136);"></div></a></td><td class="mceLast"><a role="button"
+                                                                                            id="event_description_backcolor_open"
+                                                                                            tabindex="-1"
+                                                                                            href="javascript:;"
+                                                                                            class="mceOpen mce_backcolor"
+                                                                                            onclick="return false;"
+                                                                                            onmousedown="return false;"
+                                                                                            title="Choisir la couleur de surlignage"><span
+        class="mceOpen mce_backcolor"><span style="display:none;" class="mceIconOnly" aria-hidden="true">▼</span></span></a></td></tr></tbody></table></div></td><td
+        style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical"
+                                         tabindex="-1"></span></td><td style="position: relative"><a role="button"
+                                                                                                     id="event_description_link"
+                                                                                                     href="javascript:;"
+                                                                                                     class="mceButton mce_link mceButtonDisabled"
+                                                                                                     onmousedown="return false;"
+                                                                                                     onclick="return false;"
+                                                                                                     aria-labelledby="event_description_link_voice"
+                                                                                                     title="Insérer / éditer un lien"
+                                                                                                     tabindex="-1"
+                                                                                                     aria-disabled="true"><span
+        class="mceIcon mce_link"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;"
+                                              id="event_description_link_voice">Insérer / éditer un lien</span></a></td><td
+        style="position: relative"><a role="button" id="event_description_unlink" href="javascript:;"
+                                      class="mceButton mce_unlink mceButtonDisabled" onmousedown="return false;"
+                                      onclick="return false;" aria-labelledby="event_description_unlink_voice"
+                                      title="Supprimer le lien" tabindex="-1" aria-disabled="true"><span
+        class="mceIcon mce_unlink"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;"
+                                                id="event_description_unlink_voice">Supprimer le lien</span></a></td><td
+        style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical"
+                                         tabindex="-1"></span></td><td style="position: relative"><a role="button"
+                                                                                                     id="event_description_image"
+                                                                                                     href="javascript:;"
+                                                                                                     class="mceButton mceButtonEnabled mce_image"
+                                                                                                     onmousedown="return false;"
+                                                                                                     onclick="return false;"
+                                                                                                     aria-labelledby="event_description_image_voice"
+                                                                                                     title="Insérer / éditer une image"
+                                                                                                     tabindex="-1"><span
+        class="mceIcon mce_image"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;"
+                                               id="event_description_image_voice">Insérer / éditer une image</span></a></td><td
+        style="position: relative"><a role="button" id="event_description_media" href="javascript:;"
+                                      class="mceButton mceButtonEnabled mce_media" onmousedown="return false;"
+                                      onclick="return false;" aria-labelledby="event_description_media_voice"
+                                      title="Insérer / éditer un média incorporé" tabindex="-1"><span
+        class="mceIcon mce_media"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;"
+                                               id="event_description_media_voice">Insérer / éditer un média incorporé</span></a></td><td
+        style="position: relative"><span class="mceSeparator" role="separator" aria-orientation="vertical"
+                                         tabindex="-1"></span></td><td style="position: relative"><a role="button"
+                                                                                                     id="event_description_code"
+                                                                                                     href="javascript:;"
+                                                                                                     class="mceButton mceButtonEnabled mce_code"
+                                                                                                     onmousedown="return false;"
+                                                                                                     onclick="return false;"
+                                                                                                     aria-labelledby="event_description_code_voice"
+                                                                                                     title="Éditer le code source HTML"
+                                                                                                     tabindex="-1"><span
+        class="mceIcon mce_code"></span><span class="mceVoiceLabel mceIconOnly" style="display: none;"
+                                              id="event_description_code_voice">Éditer le code source HTML</span></a></td><td
+        class="mceToolbarEnd mceToolbarEndButton mceLast"><span><!-- IE --></span></td></tr></tbody></table></span></div><a
+        href="#" accesskey="z"
+        title="Atteindre les boutons de l'éditeur - Alt+Q, Aller à l'éditeur - Alt-Z, Aller au chemin de l'élément - Alt-X"
+        onfocus="tinyMCE.getInstanceById('event_description').focus();"><!-- IE --></a></td></tr><tr class="mceLast"><td
+        class="mceIframeContainer mceFirst mceLast"><iframe id="event_description_ifr" src="javascript:&quot;&quot;"
+                                                            frameborder="0" allowtransparency="true"
+                                                            title="Texte richeFaites ALT-F10 pour accéder à la barre d'outils. Faites ALT-0 pour accéder à l'aide"
+                                                            style="width: 100%; height: 391px; display: block;"></iframe></td></tr></tbody></table></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6">
+        <h3><span class="glyphicon glyphicon-time"></span> Lieu et heures de la sortie</h3>
+        <div class="form-group">
+          <label for="event_date" class="col-xs-5 control-label">Date de sortie</label>
+          <div class="col-xs-7">
+
+            <input type="text" name="event_date" id="event_date" value="" class="form-control date hasDatepicker"
+                   format="dd/MM/yyyy" step="1" required="required" placeholder="JJ/MM/AAAA"></div>
+        </div>
+        <div class="form-group">
+          <label for="event_start" class="col-xs-5 control-label">Heure de début</label>
+          <div class="col-xs-7">
+
+            <input type="text" name="event_start" id="event_start" value="" class="form-control time" step="15"
+                   required="required" placeholder="HH:MM"></div>
+        </div>
+        <div class="form-group">
+          <label for="event_end" class="col-xs-5 control-label">Heure de fin</label>
+          <div class="col-xs-7">
+
+            <input type="text" name="event_end" id="event_end" value="" class="form-control time" placeholder="HH:MM"
+                   step="15"></div>
+        </div>
+        <div class="form-group">
+          <label for="user_name" class="col-xs-5 control-label">Désinscription</label>
+          <div class="col-xs-7">
+
+            <select name="event_openuntil" id="event_openuntil" class="form-control" required="required">
+              <option value="0" selected="selected">jusqu'à l'heure de la sortie</option>
+              <option value="1">1 heure avant la sortie</option>
+              <option value="2">2 heures avant la sortie</option>
+              <option value="3">3 heures avant la sortie</option>
+              <option value="4">4 heures avant la sortie</option>
+              <option value="6">6 heures avant la sortie</option>
+              <option value="12">12 heures avant la sortie</option>
+              <option value="24">24 heures avant la sortie</option>
+              <option value="48">2 jours avant la sortie</option>
+              <option value="168">1 semaine avant la sortie</option>
+              <option value="336">2 semaines avant la sortie</option>
+            </select></div>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <br><br>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <label for="event_address" class="control-label">Adresse exacte de la sortie</label>
+
+            <textarea name="event_address" id="event_address" class="form-control" rows="3" maxlength="100"
+                      required="required" cols="80"></textarea></div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <label for="event_meetingpoint" class="control-label">Point de rendez-vous</label>
+
+            <textarea name="event_meetingpoint" id="event_meetingpoint" class="form-control" rows="3" maxlength="100"
+                      cols="80"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <h3><span class="glyphicon glyphicon-send"></span> Invite tes amis à sortir</h3>
+    <div class="form-group">
+      <div class="col-xs-12">
+
+        <div id="notif">
+          <div id="notif-who">
             <dt id="who-label"><label class="optional">Envoyer une invitation à :</label></dt>
-    <dd id="who-element">
-    <label><input type="radio" name="who" id="who-nobody" value="nobody" checked="checked"> personne</label><br><label><input type="radio" name="who" id="who-friends" value="friends"> mes amis</label><br><label><input type="radio" name="who" id="who-groups" value="groups"> certains groupes d'amis</label></dd>			</div>
-        <div id="notif-chk">
+            <dd id="who-element">
+              <label><input type="radio" name="who" id="who-nobody" value="nobody" checked="checked">
+                personne</label><br><label><input type="radio" name="who" id="who-friends" value="friends"> mes
+              amis</label><br><label><input type="radio" name="who" id="who-groups" value="groups"> certains groupes
+              d'amis</label></dd>
+          </div>
+          <div id="notif-chk">
             <div id="nobody"></div>
             <div id="friends" style="display:none;">
-                <dl>
-                    <dt id="friends-label"><label class="optional">Mes amis (0)</label></dt>
-                    <dd id="friends-element">
-                        <label><input type="checkbox" name="friends[]" id="friends-friends" value="friends" checked="checked"> Tous / Aucun</label><br>
-                                        </dd>
-                </dl>
+              <dl>
+                <dt id="friends-label"><label class="optional">Mes amis (0)</label></dt>
+                <dd id="friends-element">
+                  <label><input type="checkbox" name="friends[]" id="friends-friends" value="friends" checked="checked">
+                    Tous / Aucun</label><br>
+                </dd>
+              </dl>
             </div>
-            <div id="groups" style="display:none;"><dt id="groups-label"><label class="optional">Mes groupes d'amis :</label></dt>
-    <dd id="groups-element">
-    <label><input type="checkbox" name="groups[]" id="groups-groups" value="groups"> Tous / Aucun</label></dd></div>
+            <div id="groups" style="display:none;">
+              <dt id="groups-label"><label class="optional">Mes groupes d'amis :</label></dt>
+              <dd id="groups-element">
+                <label><input type="checkbox" name="groups[]" id="groups-groups" value="groups"> Tous / Aucun</label>
+              </dd>
+            </div>
+          </div>
+          <div class="clear"></div>
         </div>
-        <div class="clear"></div>
+        <input type="submit" name="save" id="save" value="Enregistrer" class="btn btn-primary pull-right"></div>
     </div>
-                
-    <input type="submit" name="save" id="save" value="Enregistrer" class="btn btn-primary pull-right">		</div>
-        </div>
-    </form>
-
-
+  </form>
 </div>
