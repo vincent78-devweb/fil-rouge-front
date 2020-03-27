@@ -99,6 +99,7 @@ export class TripsManagerFilterFormComponent implements OnInit {
 
     tripFilters.userId = 0;
 
+    console.log(tripFilters)
     this.tripsService.filterSubject.next(tripFilters);
   }
 

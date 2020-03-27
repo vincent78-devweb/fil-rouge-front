@@ -6,10 +6,10 @@ import { UsersService } from '../../../services/users/users.service';
 import { TripsService } from '../../../services/trips/trips.service';
 import { CitiesService } from '../../../services/cities/cities.service';
 import { User } from '../../../models/community/user';
-import { Department } from '../../../models/trips/department';
-import { Poi } from '../../../models/community/poi';
+import { Department } from '../../../models/zone/department';
+import { PoiElt } from '../../../models/commons/poi-elt';
 import { PoisService } from '../../../services/pois/pois.service';
-import { City } from '../../../models/trips/city';
+import { City } from '../../../models/zone/city';
 import { UserPut } from '../../../models/community/user-put';
 
 @Component({
@@ -31,7 +31,7 @@ export class UserManagerComponent implements OnInit {
   selectedCity = undefined;
 
   user: User;
-  availablePoIs: Poi[];
+  availablePoIs: PoiElt[];
   cities: City[];
 
   constructor(private usersService: UsersService, private citiesService: CitiesService, private tripsService: TripsService, private poisService: PoisService,
@@ -168,7 +168,7 @@ export class UserManagerComponent implements OnInit {
     }
 
     // Get selected PoIs
-    let selectedPoIs: Poi[] = [];
+    let selectedPoIs: PoiElt[] = [];
     for (let i = 0; i < this.userForm.controls.pois["controls"].length; i++) {
       //console.log(this.userForm.controls.pois["controls"][i]);
       if (this.userForm.controls.pois["controls"][i].value) {
