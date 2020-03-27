@@ -10,7 +10,9 @@ import { TripUpdateComponent } from '../components/trip/trip-update/trip-update.
 import { UsersManagerComponent } from '../components/community/users-manager/users-manager.component';
 import { LastSubscribesComponent } from '../components/community/last-subscribes/last-subscribes.component';
 import { BirthdaysComponent } from '../components/community/birthdays/birthdays.component';
+import { UserManagerComponent } from '../components/community/user-manager/user-manager.component';
 
+import { CheckboxTest2Component } from '../components/tests/checkbox-test2/checkbox-test2.component';
 
 const appRouteList: Routes = [
   {
@@ -22,6 +24,10 @@ const appRouteList: Routes = [
   }, {
       path: 'birthdays',
       component: BirthdaysComponent
+  }, {
+      path: 'admin',
+      component: UserManagerComponent
+        //component: CheckboxTest2Component
   }, {
       path: 'trips',
       component: TripsManagerComponent

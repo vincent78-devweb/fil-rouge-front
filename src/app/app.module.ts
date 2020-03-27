@@ -24,6 +24,9 @@ import { UsersListComponent } from './components/community/users-list/users-list
 import { UserDetailsComponent } from './components/community/user-details/user-details.component';
 import { BreadcrumbComponent } from './components/commons/breadcrumb/breadcrumb.component';
 import { MyPaginatorComponent } from './components/commons/my-paginator/my-paginator.component';
+import { UserManagerComponent } from './components/community/user-manager/user-manager.component';
+import { CheckboxTest1Component } from './components/tests/checkbox-test1/checkbox-test1.component';
+import { CheckboxTest2Component } from './components/tests/checkbox-test2/checkbox-test2.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { MyPaginatorComponent } from './components/commons/my-paginator/my-pagin
     UsersListComponent,
     UserDetailsComponent,
     BreadcrumbComponent,
-    MyPaginatorComponent
+    MyPaginatorComponent,
+    UserManagerComponent,
+    CheckboxTest1Component,
+    CheckboxTest2Component
   ],
   imports: [
     FormsModule,

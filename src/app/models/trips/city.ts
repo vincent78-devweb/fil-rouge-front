@@ -2,7 +2,7 @@ import { Department } from '../trips/department';
 
 export interface City {
     id: number,
-    name: number,
+    name: string,
     postalCode: string,
     latitude: number,
     longitude: number,

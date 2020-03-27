@@ -1,0 +1,157 @@
+<div class="container-fluid">
+    <!-- Breadcrumb -->
+    <app-breadcrumb [title]="title" [level1]="level1" [level2]="level2"></app-breadcrumb>
+
+    <form [formGroup]="userForm" (ngSubmit)="saveUser(userForm.value)">
+
+        <!-- Form line 1 -->
+        <div class="form-row mt-5">
+            <!-- Titre -->
+            <div class="col-md-12">
+                <h6>Mes informations générales</h6>
+            </div>
+
+            <!-- Pseudo -->
+            <div class="form-group input-group-sm col-md-4">
+                <label for="inputLogin">Pseudo</label>
+                <input type="text" class="form-control" formControlName="login" id="inputLogin"
+                    [ngClass]="{ 'is-invalid': submitted && f.login.errors }" readonly>
+                <div *ngIf="submitted && f.login.errors" class="invalid-feedback">
+                    <div *ngIf="f.login.errors.required">Le pseudo est obligatoire</div>
+                </div>
+            </div>
+
+            <!-- Firstname -->
+            <div class="form-group col-md-4 input-group-sm">
+                <label for="inputFirstname">Prénom</label>
+                <input type="text" class="form-control" formControlName="firstname" id="inputFirstname"
+                    [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+                <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstname.errors.required">Le prénom est obligatoire</div>
+                </div>
+            </div>
+
+            <!-- Lastname -->
+            <div class="form-group input-group-sm col-md-4">
+                <label for="inputLastname">Nom</label>
+                <input type="text" class="form-control" formControlName="lastname" id="inputLastname"
+                    [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }">
+                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastname.errors.required">Le nom de famille est obligatoire</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form line 2 -->
+        <div class="form-row">
+            <!-- Gender selection -->
+            <div class="form-group col-md-3 input-group-sm">
+                <label for="selectGender">Genre</label>
+                <select class="form-control" formControlName="gender" id="selectGender">
+                    <option value="M" selected>Homme</option>
+                    <option value="F">Femme</option>
+                </select>
+            </div>
+
+            <!-- Lastname -->
+            <div class="form-group input-group-sm col-md-9">
+                <label for="inputEmail">Email</label>
+                <input type="email" class="form-control" formControlName="email" id="inputEmail"
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">L'email est obligatoire</div>
+                    <div *ngIf="f.email.errors.email">L'adresse doit être valide</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form line 3 -->
+        <div class="form-row mt-3">
+            <!-- Titre -->
+            <div class="col-md-12">
+                <h6>Ma présentation</h6>
+            </div>
+
+            <!-- Pseudo -->
+            <div class="form-group input-group-sm col-md-3">
+                <label for="inputBirthday">Date de naissance</label>
+                <input type="text" class="form-control" formControlName="birthday" id="inputBirthday"
+                    [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }">
+                <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
+                    <div *ngIf="f.birthday.errors.required">La date de naissance est obligatoire</div>
+                    <div *ngIf="f.birthday.errors.email">La date de naissance doit être valide</div>
+                </div>
+            </div>
+
+            <!-- Department selection -->
+            <div class="form-group input-group-sm col-md-4">
+                <label for="selectDepartment">Département</label>
+                <select class="form-control" formControlName="departmentId" id="selectDepartment" (change)="updateCitiesByDepartment($event.target.value)">
+                    <option *ngFor="let departement of departments" [value]="departement.id">
+                        {{ departement.name }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- City -->
+            <div class="form-group input-group-sm col-md-5">
+                <label for="selectCity">Commune</label>
+                <select class="form-control" formControlName="city" id="selectCity" (change)="getSelectedCity($event.target.value)">
+                    <option *ngFor="let city of cities" [value]="city.id">
+                        {{ city.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Form line 4 -->
+        <div class="form-row">
+
+            <!-- Avatar -->
+            <div class="form-group input-group-sm col-md-12">
+                <label for="inputAvatar">Avatar</label>
+                <input type="text" class="form-control" formControlName="avatar" id="inputAvatar">
+            </div>
+        </div>
+
+        <!-- Form line 5 -->
+        <div class="form-row">
+
+            <!-- Description -->
+            <div class="form-group input-group-sm col-md-12">
+                <label for="inputDescription">Description</label>
+                <textarea class="form-control" formControlName="description" id="inputDescription" rows="5"></textarea>
+            </div>
+        </div>
+
+        <!-- Form line 6 -->
+        <div class="form-row mt-3">
+            <!-- Titre -->
+            <div class="col-md-12">
+                <h6>Mes points d'intérêt</h6>
+            </div>
+            <div class="form-check d-flex flex-wrap pl-1">
+                <div *ngFor="let poi of userForm.controls.pois['controls']; let i=index;">
+                    <label class="mr-3">
+                        <input type="checkbox" [formControl]="poi">
+                        {{availablePoIs[i].name}}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form line 7 -->
+        <div class="form-row mt-3">
+            <!-- Validate selection -->
+            <div class="form-group input-group-sm col-md-4">
+                <button type="submit" class="btn btn-primary btn-sm form-btn-search ml-0"
+                    style="margin-top: 0px;">Enregistrer</button>
+                <button type="submit" class="btn btn-warning btn-sm form-btn-search"
+                    style="margin-top: 0px;" (click)="resetUserForm()">Réinitialiser le formulaire</button>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>

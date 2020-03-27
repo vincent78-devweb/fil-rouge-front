@@ -22,8 +22,8 @@ export class UserDetailsComponent implements OnInit {
   }
 
   ngOnChanges(change: SimpleChange) {
-    if(change['user'] !== undefined)
-      console.log(change['user'].currentValue);
+    //if(change['user'] !== undefined)
+    //  console.log(change['user'].currentValue);
     //(change.serie.firstChange === true) ? this.isVisible = false : this.isVisible = true;
   }
 
