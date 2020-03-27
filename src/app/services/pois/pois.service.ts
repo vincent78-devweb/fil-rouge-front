@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { of, Observable, Subject, throwError } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-import { Poi } from '../../models/community/poi';
+import { Poi } from '../../models/commons/poi';
+
+import {Region} from '../../models/zone/region';
 
 @Injectable({
   providedIn: 'root'

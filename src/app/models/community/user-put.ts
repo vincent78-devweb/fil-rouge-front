@@ -1,5 +1,5 @@
-import { City } from '../trips/city';
-import { Poi } from '../community/poi';
+import { City } from '../zone/city';
+import { PoiElt } from '../commons/poi-elt';
 
 export interface UserPut {
     id: number,
@@ -12,5 +12,5 @@ export interface UserPut {
     description: string,
     birthday: string,
     city: City,
-    pois: Poi[]
+    pois: PoiElt[]
 }

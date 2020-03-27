@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges} from '@angular/core';
-import {PagerParams} from '../../../models/commons/pager-params';
-import {Trip} from '../../../models/trips/trip';
-import {TripsService} from '../../../services/trips/trips.service';
-import {TripFilters} from '../../../models/trips/trip-filters' ;
-import {TripsListPager} from '../../../models/trips/trips-list-pager';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
+import { PagerParams } from '../../../models/commons/pager-params';
+import { Trip } from '../../../models/trips/trip';
+import { TripsService } from '../../../services/trips/trips.service';
+import { TripFilters } from '../../../models/trips/trip-filters';
+import { TripsListPager } from '../../../models/trips/trips-list-pager';
 
 @Component({
   selector: 'app-trips-list',
@@ -16,7 +16,7 @@ export class TripsListComponent implements OnInit, OnChanges {
   // - Du bandeau de titre
   // - Du formulaire de filtre users
   @Output() onNotifyShowTrip = new EventEmitter<Trip>();
-  @Input() trip: Trip ;
+  @Input() trip: Trip;
 
   tripFilters: TripFilters;
   trips: Trip[] = [];
@@ -24,7 +24,7 @@ export class TripsListComponent implements OnInit, OnChanges {
   pager: PagerParams;
   pageNumber: number;
 
-  constructor( private tripsService: TripsService ) {
+  constructor(private tripsService: TripsService) {
     this.pager = {
       currentPage: 0,
       totalPages: 0,
@@ -40,25 +40,29 @@ export class TripsListComponent implements OnInit, OnChanges {
 
       this.tripFilters = filters;
 
-      this.paginate(0);
+      // TODO : Workaround cause poId can be undefined
+      if (this.tripFilters !== undefined)
+        this.paginate(0);
     });
   }
 
-  onPaginate(pageNumber){
+  onPaginate(pageNumber) {
     this.paginate(pageNumber);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-/*
-      let trip: Trip = changes['trip'].currentValue ;
-    for (let i = 0; i < this.trips.length ; i++) {
-        if(this.trips[i].id == trip.id) {
-          this.trips[i] = trip;
-          break;
+    /*
+          let trip: Trip = changes['trip'].currentValue ;
+        for (let i = 0; i < this.trips.length ; i++) {
+            if(this.trips[i].id == trip.id) {
+              this.trips[i] = trip;
+              break;
+            }
         }
-    }
-*/
-    this.paginate(this.pageNumber);
+    */
+    // TODO : Workaround cause poId can be undefined
+    if (this.tripFilters !== undefined)
+      this.paginate(this.pageNumber);
   }
 
 
@@ -73,18 +77,18 @@ export class TripsListComponent implements OnInit, OnChanges {
   paginate(pageNumber: number) {
 
     this.pageNumber = pageNumber;
-    this.tripsService.filterTrips( this.tripFilters.poiId, this.tripFilters.regionId, this.tripFilters.departmentId, this.tripFilters.keywords , this.tripFilters.userId ,this.tripFilters.startDate , pageNumber, 20, "name,asc").subscribe(data => {
+    this.tripsService.filterTrips(this.tripFilters.poiId, this.tripFilters.regionId, this.tripFilters.departmentId, this.tripFilters.keywords, this.tripFilters.userId, this.tripFilters.startDate, pageNumber, 20, "name,asc").subscribe(data => {
       const tripsListPager: TripsListPager = data;
       console.log(data)
       this.trips = data.content;
 
       let currentPager: PagerParams;
       currentPager = {
-        currentPage : tripsListPager.number,
-        totalPages : tripsListPager.totalPages,
-        pageTotalElements : this.trips.length,
-        totalElements : tripsListPager.totalElements,
-        size : tripsListPager.size
+        currentPage: tripsListPager.number,
+        totalPages: tripsListPager.totalPages,
+        pageTotalElements: this.trips.length,
+        totalElements: tripsListPager.totalElements,
+        size: tripsListPager.size
       }
 
       this.pager = currentPager;
@@ -99,7 +103,7 @@ export class TripsListComponent implements OnInit, OnChanges {
    */
   showTrip(trip: Trip) {
     // Notification Affichage demandé des informations détaillées d'un utilisateur
-   this.onNotifyShowTrip.emit(trip);
+    this.onNotifyShowTrip.emit(trip);
   }
 
 }

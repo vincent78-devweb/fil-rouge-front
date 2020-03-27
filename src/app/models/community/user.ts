@@ -1,5 +1,5 @@
 import { City } from '../zone/city';
-import { Poi } from '../commons/poi';
+import { PoiElt } from '../commons/poi-elt';
 
 export interface User {
     id: number,
@@ -11,7 +11,7 @@ export interface User {
     description: string,
     birthday: string,
     city: City,
-    pois: Poi[],
+    pois: PoiElt[],
     gender: string,
     dateCreation: string,
     age: number

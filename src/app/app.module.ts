@@ -17,7 +17,6 @@ import { TripCreateComponent } from './components/trip/trip-create/trip-create.c
 import { TripUpdateComponent } from './components/trip/trip-update/trip-update.component';
 import { MyTripsManagerComponent } from './components/trips/my-trips-manager/my-trips-manager.component';
 import { TripsManagerFilterFormComponent } from './components/trips/trips-manager-filter-form/trips-manager-filter-form.component';
-import { TripsTableComponent } from './components/trips/trips-table/trips-table.component';
 import { TripDetailsComponent } from './components/trip/trip-details/trip-details.component';
 import { UsersFilterFormComponent } from './components/community/users-filter-form/users-filter-form.component';
 import { UsersListComponent } from './components/community/users-list/users-list.component';
@@ -25,8 +24,7 @@ import { UserDetailsComponent } from './components/community/user-details/user-d
 import { BreadcrumbComponent } from './components/commons/breadcrumb/breadcrumb.component';
 import { MyPaginatorComponent } from './components/commons/my-paginator/my-paginator.component';
 import { UserManagerComponent } from './components/community/user-manager/user-manager.component';
-import { CheckboxTest1Component } from './components/tests/checkbox-test1/checkbox-test1.component';
-import { CheckboxTest2Component } from './components/tests/checkbox-test2/checkbox-test2.component';
+import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +39,6 @@ import { CheckboxTest2Component } from './components/tests/checkbox-test2/checkb
     TripUpdateComponent,
     MyTripsManagerComponent,
     TripsManagerFilterFormComponent,
-    TripsTableComponent,
     TripDetailsComponent,
     UsersFilterFormComponent,
     UsersListComponent,
@@ -49,8 +46,7 @@ import { CheckboxTest2Component } from './components/tests/checkbox-test2/checkb
     BreadcrumbComponent,
     MyPaginatorComponent,
     UserManagerComponent,
-    CheckboxTest1Component,
-    CheckboxTest2Component
+    TripsListComponent
   ],
   imports: [
     FormsModule,
