@@ -7,9 +7,9 @@
         <h5> {{ pager.totalElements + " membres inscrits"}} </h5>
 
         <ul class="list-group mt-3">
-            <li *ngFor="let user of users" class="list-group-item list-group-item-action ">
+            <li *ngFor="let user of users" class="list-group-item list-group-item-action">
                 <div class="media">
-                    <img src="../../../../assets/10303-man-office-worker-light-skin-tone-icon.png" class="mr-3"
+                    <img [src]="user.avatar" class="mr-3"
                         alt="...">
                     <div class="media-body">
                         <h5 class="mt-0 mb-1">{{ user.firstname + " " + user.lastname + " (" + user.login + ")" }}</h5>

@@ -1,7 +1,8 @@
-<form [formGroup]="filterForm" (ngSubmit)="filterUsers(filterForm.value)" class="container-fluid">
+<form [formGroup]="filterForm" (ngSubmit)="filterUsers(filterForm.value)">
 
     <!-- Form line 1 -->
     <div class="form-row">
+        
         <!-- Gender selection -->
         <div class="form-group col-md-4 input-group-sm">
             <select class="form-control" formControlName="gender" id="inputGender">

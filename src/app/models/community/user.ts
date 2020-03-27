@@ -11,8 +11,8 @@ export interface User {
     description: string,
     birthday: string,
     city: City,
-    poi: Poi[],
-    gender: string, // Alias sex in entity User
+    pois: Poi[],
+    gender: string,
     dateCreation: string,
     age: number
 }
