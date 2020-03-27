@@ -1,9 +1,18 @@
 <div class="container-fluid">
     <!-- Breadcrumb -->
-    <h6 class="card-title d-flex" style="margin-top: 20px;">Sortir > Gérer mes sorties</h6>
+  <app-breadcrumb [title]="title" [level1]="level1" [level2]="level2" ></app-breadcrumb>
 
+</div>
 
+<!-- Trip list -->
+<div [style.display]="isListTripVisible ? 'block' : 'none'">
+  <app-trips-list  (onNotifyShowTrip)="notifyShowTrip($event)">
+  </app-trips-list>
+</div>
 
+<!-- User details -->
+<div [style.display]="isTripVisible ? 'block' : 'none'">
+  <app-trip-details [trip]="trip" (onNotifyHideTrip)="notifyHideTrip($event)"></app-trip-details>
 </div>
 
 

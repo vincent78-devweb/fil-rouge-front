@@ -1,5 +1,5 @@
-import { City } from '../trips/city';
-import { Poi } from '../community/poi';
+import { City } from '../zone/city';
+import { Poi } from '../commons/poi';
 
 export interface User {
     id: number,

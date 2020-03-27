@@ -17,13 +17,13 @@ import { TripCreateComponent } from './components/trip/trip-create/trip-create.c
 import { TripUpdateComponent } from './components/trip/trip-update/trip-update.component';
 import { MyTripsManagerComponent } from './components/trips/my-trips-manager/my-trips-manager.component';
 import { TripsManagerFilterFormComponent } from './components/trips/trips-manager-filter-form/trips-manager-filter-form.component';
-import { TripsTableComponent } from './components/trips/trips-table/trips-table.component';
 import { TripDetailsComponent } from './components/trip/trip-details/trip-details.component';
 import { UsersFilterFormComponent } from './components/community/users-filter-form/users-filter-form.component';
 import { UsersListComponent } from './components/community/users-list/users-list.component';
 import { UserDetailsComponent } from './components/community/user-details/user-details.component';
 import { BreadcrumbComponent } from './components/commons/breadcrumb/breadcrumb.component';
 import { MyPaginatorComponent } from './components/commons/my-paginator/my-paginator.component';
+import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
 
 @NgModule({
   declarations: [
@@ -38,13 +38,13 @@ import { MyPaginatorComponent } from './components/commons/my-paginator/my-pagin
     TripUpdateComponent,
     MyTripsManagerComponent,
     TripsManagerFilterFormComponent,
-    TripsTableComponent,
     TripDetailsComponent,
     UsersFilterFormComponent,
     UsersListComponent,
     UserDetailsComponent,
     BreadcrumbComponent,
-    MyPaginatorComponent
+    MyPaginatorComponent,
+    TripsListComponent
   ],
   imports: [
     FormsModule,

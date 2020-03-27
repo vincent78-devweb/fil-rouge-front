@@ -1,45 +1,80 @@
-<p>trip-details works!</p>
-
+<div [style.display]="isTripVisible ? 'block' : 'none'" *ngIf="trip !== undefined">
 <div class="media">
-    <div class="pull-left">
-        <img alt="Apprendre la méditation chez soi" width="200" height="200" src="https://www.toutpoursortir.fr/images/events/2020/03/7500-apprendre-meditation-chez-soi-200x200.jpeg" class="img-thumbnail" itemprop="photo">			<br><br>
-        <div id="partage" class="text-center">
-                            <strong>Invite tes amis à sortir avec toi !</strong><br>
-            <a target="_blank" rel="nofollow" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.toutpoursortir.fr%2F%2Fsortir-paris-1%2F7500-apprendre-meditation-chez-soi.html" onclick="javascript:window.open(this.href, 'Partager sur Facebook', 'toolbar=0,status=0,width=548,height=325'); return false;"><span class="sprite sprite-social-facebook"></span></a>
-            <a target="_blank" rel="nofollow" href="https://twitter.com/share?url=https%3A%2F%2Fwww.toutpoursortir.fr%2F%2Fsortir-paris-1%2F7500-apprendre-meditation-chez-soi.html&amp;text=ToutPourSortir.fr+-+Apprendre+la+m%C3%A9ditation+chez+soi&amp;via=ToutPourSortir" onclick="javascript:window.open(this.href, 'Partager sur Twitter', 'toolbar=0,status=0,width=548,height=325'); return false;"><span class="sprite sprite-social-twitter"></span></a>
-            <a target="_blank" rel="nofollow" href="mailto:?subject=ToutPourSortir.fr - Apprendre la méditation chez soi&amp;body=https%3A%2F%2Fwww.toutpoursortir.fr%2F%2Fsortir-paris-1%2F7500-apprendre-meditation-chez-soi.html"><span class="sprite sprite-social-email"></span></a>
-        </div>
+  <div class="pull-left">
+    <img alt="Apprendre la méditation chez soi" width="200" height="200"
+         src="https://www.toutpoursortir.fr/images/events/2020/03/7500-apprendre-meditation-chez-soi-200x200.jpeg"
+         class="img-thumbnail" itemprop="photo"> <br><br>
+    <div id="partage" class="text-center">
+      <strong>Invite tes amis à sortir avec toi !</strong><br>
+      <a target="_blank" rel="nofollow"
+         href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.toutpoursortir.fr%2F%2Fsortir-paris-1%2F7500-apprendre-meditation-chez-soi.html"
+         onclick="javascript:window.open(this.href, 'Partager sur Facebook', 'toolbar=0,status=0,width=548,height=325'); return false;"><span
+        class="sprite sprite-social-facebook"></span></a>
+      <a target="_blank" rel="nofollow"
+         href="https://twitter.com/share?url=https%3A%2F%2Fwww.toutpoursortir.fr%2F%2Fsortir-paris-1%2F7500-apprendre-meditation-chez-soi.html&amp;text=ToutPourSortir.fr+-+Apprendre+la+m%C3%A9ditation+chez+soi&amp;via=ToutPourSortir"
+         onclick="javascript:window.open(this.href, 'Partager sur Twitter', 'toolbar=0,status=0,width=548,height=325'); return false;"><span
+        class="sprite sprite-social-twitter"></span></a>
+      <a target="_blank" rel="nofollow"
+         href="mailto:?subject=ToutPourSortir.fr - Apprendre la méditation chez soi&amp;body=https%3A%2F%2Fwww.toutpoursortir.fr%2F%2Fsortir-paris-1%2F7500-apprendre-meditation-chez-soi.html"><span
+        class="sprite sprite-social-email"></span></a>
     </div>
-    <div class="media-body">
-        <dl class="dl-horizontal">
-            <dt>Organisateur</dt>
-            <dd><a href="/trombi/instantpresent" class="nickname male vcard">instantpresent</a></dd>
-            
-            <dt>Téléphone</dt>
-            <dd>NC</dd>
-        </dl>
-        
-        <dl >
-            <dt>Ville</dt>
-            <dd itemprop="location">Paris 1er (75001)</dd>
-            
-            <dt>Date de la sortie</dt>
-            <dd>dimanche 22 mars 2020</dd>
-            
-            <dt>Heure de début</dt>
-            <dd><time itemprop="startDate" datetime="2020-03-22T19:45:00+01:00">19:45</time></dd>
-            
-            <dt>Heure de fin</dt>
-            <dd><time itemprop="endDate" datetime="2020-03-22T21:45:00+01:00">21:45</time></dd>
-        </dl>
-        
-                    <dl class="dl-horizontal">
-            <dt>Adresse exacte</dt>
-            <dd><address>A domicile</address></dd>
-            
-            <dt>Lieu de RDV</dt>
-            <dd><address>En cliquant sur ce lien:<br>
-https://www.youtube.com/playlist?list=PLGrGY2JUdKNglRCuONjEZSZPR</address></dd>
-        </dl>
-                </div>
+  </div>
+  <div class="media-body">
+    <dl class="dl-horizontal">
+      <dt>Organisateur</dt>
+      <dd  class="nickname male vcard">
+        <button class="page-link"  (click)="showUser()"> {{trip.promoteur.firstname}}  {{trip.promoteur.lastname}}</button>
+      </dd>
+
+      <dt>Mail</dt>
+      <dd>{{trip.promoteur.email}}</dd>
+
+      <dt>Ville</dt>
+      <dd itemprop="location">{{trip.city.name}} {{trip.city.department.name}} </dd>
+
+      <dt>Date de la sortie</dt>
+      <dd>{{trip.dateTrip}}</dd>
+
+      <dt>Heure de début</dt>
+      <dd>{{trip.timeStart}}</dd>
+
+      <dt>Heure de fin</dt>
+      <dd>{{trip.timeEnd}}</dd>
+
+      <dt>Classé dans </dt>
+      <dd>{{trip.poi.name }} </dd>
+
+      <dt>Description</dt>
+      <dd>{{trip.description}}</dd>
+
+      <dt>Lieu de RDV</dt>
+      <dd>
+        <a href="https://www.google.com/maps/place/46°23'33.0%22N+4°83'33.0%22E" target="_blank"  >En cliquant sur ce lien:</a>
+      </dd>
+
+      <dt>Nombre </dt>
+      <dd>{{trip.users.length}} / {{trip.nbPerson}}  entre {{trip.ageMin}} et {{trip.ageMax}}  </dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <button type="button" class="btn btn-primary btn-sm" (click)="register()">{{action}}</button>
+
+      <li *ngFor="let user of trip.users" class="list-group-item list-group-item-action ">
+        <div class="media">
+          <img src="../../../../assets/10303-man-office-worker-light-skin-tone-icon.png" class="mr-3" alt="...">
+          <div class="media-body">
+            <h5 class="mt-0 mb-1">{{ user.firstname + " " + user.lastname + " (" + user.login + ")" }}</h5>
+            <p>{{ user.gender + ", " + user.age + " ans - "}}
+            </p>
+          </div>
+        </div>
+      </li>
+
+    </dl>
+  </div>
+</div>
+<button type="button" class="btn btn-primary btn-sm" (click)="hide()">Retour</button>
+</div>
+<!-- User details -->
+<div [style.display]="isUserVisible ? 'block' : 'none'">
+  <app-user-details [user]="user" (onNotifyHideUser)="notifyHideUSer()"></app-user-details>
 </div>
