@@ -11,6 +11,12 @@ export class CitiesService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Get all cities from a department
+   * 
+   * @param departmentId the department to get 
+   * @returns the cities
+   */
   public getCitiesByDepartment(departmentId: number): Observable<City[]> {
     return this.http.get<City[]>("http://localhost:8080/api/cities/departments/" + departmentId);
   }

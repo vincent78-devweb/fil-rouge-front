@@ -21,12 +21,15 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * TODO : not used, to be deleted
+   * @param change 
+   */
   ngOnChanges(change: SimpleChange) {
     //if(change['user'] !== undefined)
     //  console.log(change['user'].currentValue);
     //(change.serie.firstChange === true) ? this.isVisible = false : this.isVisible = true;
   }
-
 
   /**
    * Emit event : Close component 

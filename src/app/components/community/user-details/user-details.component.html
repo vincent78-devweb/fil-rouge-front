@@ -24,9 +24,13 @@
                     <dt>Description</dt>
                     <dd>{{ user.description }}</dd>
                 </dl>
+                <dl>
+                    <dt>Points d'intérêts</dt>
+                    <dd *ngFor="let poi of user.pois">{{ poi.name }}</dd>
+                </dl>
 
             </div>
-            <img [src]="user.avatar" style="width: 100px;" class="mr-3" alt="...">
+            <img [src]="user.avatar" style="width: 100px;" class="mr-2" alt="...">
         </li>
     </ul>
 

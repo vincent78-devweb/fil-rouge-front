@@ -44,16 +44,20 @@ export class UsersListComponent implements OnInit {
     });
   }
 
+  /**
+   * Paginate action event
+   * 
+   * @param pageNumber the page to show 
+   */
   onPaginate(pageNumber){
     this.paginate(pageNumber);
   }
 
-    /**
+  /**
    * Paginate to the sent page
+   * TODO : refactor this function in onPaginate()
    * 
-   * @param filters 
-   * @param pageNumber
-   * @see https://jasonwatmore.com/post/2019/06/18/angular-8-simple-pagination-example 
+   * @param pageNumber the page to show
    */
   paginate(pageNumber: number) {
     this.usersService.filterUsers(this.userFilters.gender, this.userFilters.ageCategory, this.userFilters.pseudo, this.userFilters.regionId, this.userFilters.departmentId, pageNumber, 20, "login,asc").subscribe(data => {
@@ -77,12 +81,11 @@ export class UsersListComponent implements OnInit {
   /**
    * Afficher les informations détaillées d'un utilisateur
    * 
-   * @param user 
+   * @param user the user to show
    */
   showUser(user: User) {
     // Notification Affichage demandé des informations détaillées d'un utilisateur
     this.onNotifyShowUser.emit(user);
   }
-
 
 }

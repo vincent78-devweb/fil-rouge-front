@@ -36,19 +36,24 @@ export class LastSubscribesComponent implements OnInit {
   }
 
   ngOnInit() {
+    // At start, show the first page of user's biryhdays by default
     this.paginate(0);
   }
 
+  /**
+   * Paginate action event
+   * 
+   * @param pageNumber the page to show 
+   */
   onPaginate(pageNumber){
     this.paginate(pageNumber);
   }
 
   /**
    * Paginate to the sent page
+   * TODO : refactor this function in onPaginate()
    * 
-   * @param filters 
-   * @param pageNumber
-   * @see https://jasonwatmore.com/post/2019/06/18/angular-8-simple-pagination-example 
+   * @param pageNumber the page to show
    */
   paginate(pageNumber: number) {
     this.usersService.filterUsers('', '', '', 0, 0, pageNumber, 20, "dateCreation,desc").subscribe(data => {
@@ -69,6 +74,11 @@ export class LastSubscribesComponent implements OnInit {
     });
   }
 
+  /**
+   * Show the user details
+   * 
+   * @param user the user to show
+   */
   showUser(user: User) {
     this.user = user;
     this.level2 = user.firstname + " " + user.lastname;
@@ -76,6 +86,11 @@ export class LastSubscribesComponent implements OnInit {
     this.isUserVisible = true;
   }
 
+  /**
+   * Hide the user details
+   * 
+   * @param $event The user to hide
+   */
   notifyHideUSer($event) {
     this.user = undefined;
     this.level2 = '';
