@@ -26,6 +26,7 @@ import { BreadcrumbComponent } from './components/commons/breadcrumb/breadcrumb.
 import { MyPaginatorComponent } from './components/commons/my-paginator/my-paginator.component';
 import { UserManagerComponent } from './components/community/user-manager/user-manager.component';
 import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
+import { LeftBarCollapsideComponent } from './components/commons/left-bar-collapside/left-bar-collapside.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { TripsListComponent } from './components/trips/trips-list/trips-list.com
     BreadcrumbComponent,
     MyPaginatorComponent,
     UserManagerComponent,
-    TripsListComponent
+    TripsListComponent,
+    LeftBarCollapsideComponent
   ],
   imports: [
     FormsModule,
