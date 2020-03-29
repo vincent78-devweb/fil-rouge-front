@@ -61,6 +61,10 @@ body {
     height: 16px;
     vertical-align: text-bottom;
   }
+
+  .last-subs {
+    background-image: url("assets/man-raising-hand-light-skin-tone.svg");
+  }
   
   /*
    * Sidebar
@@ -159,3 +163,19 @@ body {
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
   }
   
+
+
+  .overlay {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1998;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+  }
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }

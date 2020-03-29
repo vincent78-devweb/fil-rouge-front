@@ -27,6 +27,7 @@ export class UserManagerComponent implements OnInit {
   userForm: FormGroup;
   submitted = false;
   selectedCity = undefined;
+  updateStatusCode = undefined;
 
   user: User;
   availablePoIs: PoiElt[];
@@ -197,8 +198,14 @@ export class UserManagerComponent implements OnInit {
       pois: selectedPoIs
     }
 
-    //console.log(userPost);
-    this.usersService.saveUser(userPost, this.user.id);
+    // Save the user into the db
+    this.usersService.updateUser(userPost, this.user.id).subscribe(data => {
+      // Show a modal window for confirmation
+      this.updateStatusCode = true;
+    }, error => {
+      // Show a modal window for confirmation
+      this.updateStatusCode = false;
+    });
   }
 
   /**
@@ -206,6 +213,7 @@ export class UserManagerComponent implements OnInit {
    */
   resetUserForm() {
     this.submitted = false;
+    this.updateStatusCode = undefined;
     this.initUserForm();
   }
 

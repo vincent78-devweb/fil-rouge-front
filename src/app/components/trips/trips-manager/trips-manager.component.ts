@@ -9,8 +9,8 @@ import {Trip} from '../../../models/trips/trip';
 })
 export class TripsManagerComponent implements OnInit {
 
-  title: string = "Les sorties";
-  level1: string = "";
+  title: string = "Sortir";
+  level1: string = "Les sorties";
   level2: string = "";
 
   isFormListVisible = true;

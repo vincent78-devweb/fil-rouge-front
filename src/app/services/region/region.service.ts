@@ -12,6 +12,10 @@ export class RegionService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Get all regions
+   * @returns the regions
+   */
   public getRegions(): Observable<Region[]> {
     return this.http.get<Region[]>("http://localhost:8080/api/regions");
   }

@@ -35,7 +35,7 @@ const appRouteList: Routes = [
       component: MyTripsManagerComponent
   }, {
       path: '**',
-      redirectTo: 'birthdays'
+      redirectTo: 'trips'
   }
 ];
 

@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorIntercept } from './interceptors/error.interceptor';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -26,6 +27,7 @@ import { UserManagerComponent } from './components/community/user-manager/user-m
 import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
 import { TripUpdateComponent } from './components/trip/trip-update/trip-update.component';
 import { MyTripsListComponent } from './components/trips/my-trips-list/my-trips-list.component';
+import { LeftBarCollapsideComponent } from './components/commons/left-bar-collapside/left-bar-collapside.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { MyTripsListComponent } from './components/trips/my-trips-list/my-trips-
     MyPaginatorComponent,
     UserManagerComponent,
     TripsListComponent,
+    LeftBarCollapsideComponent
+    TripsListComponent,
     TripUpdateComponent,
     MyTripsListComponent
   ],
@@ -58,7 +62,13 @@ import { MyTripsListComponent } from './components/trips/my-trips-list/my-trips-
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorIntercept,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

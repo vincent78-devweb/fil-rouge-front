@@ -14,6 +14,10 @@ export class PoisService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Get all points of interests
+   * @returns the points of interests
+   */
   public getPois(): Observable<Poi[]> {
     return this.http.get<Poi[]>("http://localhost:8080/api/pois");
   }

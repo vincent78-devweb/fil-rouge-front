@@ -53,7 +53,7 @@
                 </select>
             </div>
 
-            <!-- Lastname -->
+            <!-- Email -->
             <div class="form-group input-group-sm col-md-9">
                 <label for="inputEmail">Email</label>
                 <input type="email" class="form-control" formControlName="email" id="inputEmail"
@@ -72,14 +72,14 @@
                 <h6>Ma présentation</h6>
             </div>
 
-            <!-- Pseudo -->
+            <!-- Date de naissance -->
             <div class="form-group input-group-sm col-md-3">
                 <label for="inputBirthday">Date de naissance</label>
-                <input type="text" class="form-control" formControlName="birthday" id="inputBirthday"
+                <input type="date" class="form-control" formControlName="birthday" id="inputBirthday"
                     [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }">
                 <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
                     <div *ngIf="f.birthday.errors.required">La date de naissance est obligatoire</div>
-                    <div *ngIf="f.birthday.errors.email">La date de naissance doit être valide</div>
+                    <div *ngIf="f.birthday.errors.required">La date de naissance doit être valide</div>
                 </div>
             </div>
 
@@ -144,14 +144,21 @@
         <div class="form-row mt-3">
             <!-- Validate selection -->
             <div class="form-group input-group-sm col-md-12">
-                <button type="submit" class="btn btn-primary btn-sm form-btn-search ml-0"
+                <button type="submit" class="btn btn-primary btn-sm form-btn-search ml-0" 
                     style="margin-top: 0px;">Enregistrer</button>
-                <button type="submit" class="btn btn-warning btn-sm form-btn-search"
+                <button type="button" class="btn btn-warning btn-sm form-btn-search"
                     style="margin-top: 0px;" (click)="resetUserForm()">Réinitialiser le formulaire</button>
             </div>
         </div>
 
     </form>
 
-
 </div>
+
+<div class="alert alert-success" role="alert" *ngIf="updateStatusCode == true">
+    Vos informations ont bien été enregistrées.
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="updateStatusCode == false">
+    Une erreur s'est produite, vos informations n'ont pas été enregistrées!
+</div>
+
