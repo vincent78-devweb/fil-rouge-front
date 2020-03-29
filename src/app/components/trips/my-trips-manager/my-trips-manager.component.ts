@@ -3,6 +3,7 @@ import {Trip} from '../../../models/trips/trip';
 import {TripsService} from '../../../services/trips/trips.service';
 import {TripFilters} from '../../../models/trips/trip-filters';
 import {UsersService} from '../../../services/users/users.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-trips-manager',
@@ -11,8 +12,8 @@ import {UsersService} from '../../../services/users/users.service';
 })
 export class MyTripsManagerComponent implements OnInit,  AfterViewInit {
 
-  title = 'Les sorties';
-  level1 = '';
+  title = 'Sortir';
+  level1 = 'Mes sorties';
   level2 = '';
 
   isFormListVisible = true;
@@ -21,7 +22,7 @@ export class MyTripsManagerComponent implements OnInit,  AfterViewInit {
   trip: Trip;
   currentUser: number;
 
-  constructor(
+  constructor(private router: Router,
     private tripsService: TripsService,
     private usersService: UsersService,
 
@@ -76,8 +77,7 @@ export class MyTripsManagerComponent implements OnInit,  AfterViewInit {
     this.isListTripVisible = true;
     // Toggle : hide user details
     this.isTripVisible = false;
+
+
   }
-
-
-
 }

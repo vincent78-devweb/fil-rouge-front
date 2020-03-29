@@ -6,7 +6,7 @@
       <div class="media">
         <div class="media-body">
           <h5 class="mt-0 mb-1">{{ trip.name }}</h5>
-          <p> Sortie le {{ trip.dateTrip }}
+          <p> Sortie le {{ trip.dateTrip }} à {{trip.city.name}} ({{trip.city.department.name}})
             <br/>
             {{trip.users.length}} / {{trip.nbPerson}}  age entre {{trip.ageMin}} et {{trip.ageMax}}
           </p>

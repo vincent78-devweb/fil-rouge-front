@@ -26,8 +26,8 @@ export class TripManagerService {
    * param trip
    * param id
    */
-  public updateTrip(trip: TripManager, id: number): Observable<Trip> {
-    return this.http.put<Trip>('http://localhost:8080/api/tripmanager/' + id, trip);
+  public updateTrip(trip: TripManager): Observable<Trip> {
+    return this.http.put<Trip>('http://localhost:8080/api/tripmanager/' + trip.id, trip);
   }
 
   public deleteTrip( id: number): Observable<Trip> {

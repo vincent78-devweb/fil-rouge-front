@@ -49,7 +49,7 @@ import { LeftBarCollapsideComponent } from './components/commons/left-bar-collap
     MyPaginatorComponent,
     UserManagerComponent,
     TripsListComponent,
-    LeftBarCollapsideComponent
+    LeftBarCollapsideComponent,
     TripsListComponent,
     TripUpdateComponent,
     MyTripsListComponent

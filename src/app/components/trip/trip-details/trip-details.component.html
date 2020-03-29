@@ -56,7 +56,9 @@
       <dd>{{trip.users.length}} / {{trip.nbPerson}}  entre {{trip.ageMin}} et {{trip.ageMax}}  </dd>
     </dl>
     <dl class="dl-horizontal">
-      <button type="button" class="btn btn-primary btn-sm" (click)="register()">{{action}}</button>
+
+      <button *ngIf="!max && !isRegister" type="button" class="btn btn-primary btn-sm" (click)="register()">{{registerTrip}}</button>
+      <button *ngIf="isRegister" type="button" class="btn btn-primary btn-sm" (click)="register()">{{unregisterTrip}}</button>
 
       <li *ngFor="let user of trip.users" class="list-group-item list-group-item-action ">
         <div class="media">

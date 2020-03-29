@@ -25,11 +25,11 @@ export class UsersManagerComponent implements OnInit {
 
   /**
    * Toggle display from [form filters, user list] to user details
-   *  
+   *
    * @param user the user to display
    */
   notifyShowUser(user: User) {
-    console.log(user);
+  //  console.log(user);
     // Update the breadcrumb : show user name
     this.user = user;
     this.level2 = user.firstname + " " + user.lastname;
@@ -41,7 +41,7 @@ export class UsersManagerComponent implements OnInit {
 
   /**
    * Toggle display from user details to [form filters, user list]
-   *  
+   *
    * @param user the user to hide
    */
   notifyHideUSer(user: User) {

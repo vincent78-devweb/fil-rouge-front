@@ -51,16 +51,7 @@ export class TripsListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    /*
-          let trip: Trip = changes['trip'].currentValue ;
-        for (let i = 0; i < this.trips.length ; i++) {
-            if(this.trips[i].id == trip.id) {
-              this.trips[i] = trip;
-              break;
-            }
-        }
-    */
-    // TODO : Workaround cause poId can be undefined
+    console.log("Test");
     if (this.tripFilters !== undefined)
       this.paginate(this.pageNumber);
   }

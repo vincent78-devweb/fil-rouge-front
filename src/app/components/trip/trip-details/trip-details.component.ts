@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange,
 import {User} from '../../../models/community/user';
 import {Trip} from '../../../models/trips/trip';
 import {TripsService} from '../../../services/trips/trips.service';
+import {UsersService} from '../../../services/users/users.service';
 
 @Component({
   selector: 'app-trip-details',
@@ -12,6 +13,7 @@ export class TripDetailsComponent implements OnInit, OnChanges {
 
   constructor(
     private tripsService: TripsService,
+    private usersService: UsersService,
   ) {
   }
 
@@ -24,14 +26,14 @@ export class TripDetailsComponent implements OnInit, OnChanges {
   isTripVisible = true;
   isUserVisible = false;
   user: User;
-  action: string;
   isRegister: boolean;
   currentUserId: number;
-
+  registerTrip = 'Inscrivez-vous';
+  unregisterTrip = 'Se déinscrire';
+  max: boolean;
 
   ngOnInit() {
-    // user = new User();
-    this.currentUserId = 1;
+    this.currentUserId = this.usersService.currentUser.id;
 
   }
 
@@ -69,21 +71,24 @@ export class TripDetailsComponent implements OnInit, OnChanges {
   }
 
   check() {
-     this.action = 'Inscrivez-vous';
     this.isRegister = false;
     if (this.trip != undefined) {
       if (this.trip !== null) {
-        if (this.trip.users.length > 0) {
-          for (const currentUser of this.trip.users) {
-            if (currentUser.id === this.currentUserId) {
-              this.action = 'Se désinscrire';
-              this.isRegister = true;
-              break;
-            }
+        if (this.trip.users.length == this.trip.nbPerson) {
+          this.max = true;
+        } else {
+          this.max = false;
+        }
+      }
+      if (this.trip.users.length > 0) {
+        for (const currentUser of this.trip.users) {
+          if (currentUser.id === this.currentUserId) {
+            this.isRegister = true;
+            break;
           }
         }
       }
     }
   }
-
 }
+

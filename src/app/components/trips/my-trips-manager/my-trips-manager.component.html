@@ -4,7 +4,7 @@
 
   <!-- Trip list -->
   <div [style.display]="isListTripVisible ? 'block' : 'none'">
-    <app-my-trips-list  (onNotifyShowTrip)="notifyShowTrip($event)">
+    <app-my-trips-list [trip]="trip" (onNotifyShowTrip)="notifyShowTrip($event)">
     </app-my-trips-list>
   </div>
 

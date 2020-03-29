@@ -39,7 +39,7 @@ export class TripsService {
       .set('department', department.toString())
       .set('page', page.toString())
       .set('size', size.toString())
-      .set('words', keywords)
+      .set('keywords', keywords)
       .set('user', user.toString())
       .set('startDate', startDate)
       .set('sort', sort);
