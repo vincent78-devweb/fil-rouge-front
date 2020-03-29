@@ -1,0 +1,173 @@
+<div class="container-fluid">
+  <form [formGroup]="tripForm" (ngSubmit)="saveTrip()">
+
+    <!-- Form line 1 -->
+    <div class="form-row mt-3">
+      <!-- Titre -->
+      <div class="col-md-12">
+        <h6>Informations générales</h6>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Name -->
+      <div class="form-group col-md-12 input-group-sm">
+        <label for="inputName">Titre</label>
+        <input type="text" class="form-control" formControlName="name" id="inputName"
+               [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Le titre est obligatoire</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group input-group-sm col-md-12">
+        <label for="inputDescription">Description</label>
+        <textarea class="form-control" formControlName="description" id="inputDescription" rows="5"
+                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+              </textarea>
+        <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+          <div *ngIf="f.description.errors.required">La description est obligatoire</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group input-group-sm col-md-3">
+        <h6>Le thème de la sortie</h6>
+
+        <label for="inputPoI"></label>
+        <select class="form-control" formControlName="poi" id="inputPoI"
+                [ngClass]="{ 'is-invalid': submitted && f.poi.errors }" >
+          <option value="" selected>Toutes les types</option>
+          <option *ngFor="let poi of pois" [value]="poi.id">{{ poi.name }}</option>
+        </select>
+        <div *ngIf="submitted && f.poi.errors" class="invalid-feedback">
+          <div *ngIf="f.poi.errors.required">La catégorie est obligatoire</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-12">
+        <h6>Qui</h6>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group input-group-sm col-md-4">
+        <label for="inputNbPerson"></label>
+        <select class="form-control" formControlName="nbPerson" id="inputNbPerson"
+                [ngClass]="{ 'is-invalid': submitted && f.nbPerson.errors }"  >
+          <option value="" selected>Nombre de personne</option>
+          <option *ngFor="let nb of person" [value]="nb">{{ nb }}</option>
+        </select>
+        <div *ngIf="submitted && f.nbPerson.errors" class="invalid-feedback">
+          <div *ngIf="f.nbPerson.errors.required">Le nombre de personne est obligatoire</div>
+        </div>
+      </div>
+
+      <div class="form-group input-group-sm col-md-4">
+        <label for="inputAgeMin"></label>
+        <select class="form-control" formControlName="ageMin" id="inputAgeMin">
+          <option value="" selected>Age minimum</option>
+          <option *ngFor="let age of ages" [value]="age">{{ age }}</option>
+        </select>
+      </div>
+
+      <div class="form-group input-group-sm col-md-4">
+        <label for="inputAgeMax"></label>
+        <select class="form-control" formControlName="ageMax" id="inputAgeMax">
+          <option value="" selected>Age Maximum</option>
+          <option *ngFor="let age of ages" [value]="age">{{ age }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-12">
+        <h6>Quand</h6>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group input-group-sm col-md-4">
+        <label for="inputDateTrip">Date</label>
+        <input type="date" class="form-control" formControlName="dateTrip" id="inputDateTrip"
+               [ngClass]="{ 'is-invalid': submitted && f.dateTrip.errors }">
+        <div *ngIf="submitted && f.dateTrip.errors" class="invalid-feedback">
+          <div *ngIf="f.dateTrip.errors.required">La date de sortie est obligatoire</div>
+        </div>
+      </div>
+
+      <div class="form-group input-group-sm col-md-4">
+        <label for="inputTimeStart">Heure de début</label>
+        <input type="time" class="form-control" formControlName="timeStart" id="inputTimeStart"
+               [ngClass]="{ 'is-invalid': submitted && f.timeStart.errors }">
+        <div *ngIf="submitted && f.timeStart.errors" class="invalid-feedback">
+          <div *ngIf="f.timeStart.errors.required">L’heure de début est obligatoire</div>
+        </div>
+      </div>
+
+      <div class="form-group input-group-sm col-md-4">
+        <label for="inputTimeEnd">Heure de fin</label>
+        <input type="time" class="form-control" formControlName="timeEnd" id="inputTimeEnd"
+               [ngClass]="{ 'is-invalid': submitted && f.timeEnd.errors }">
+        <div *ngIf="submitted && f.timeEnd.errors" class="invalid-feedback">
+          <div *ngIf="f.timeEnd.errors.required">L’heure de début est obligatoire</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-12">
+        <h6>Ou</h6>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group input-group-sm col-md-6">
+        <label for="selectDepartment">Département</label>
+        <select class="form-control" formControlName="departmentId" id="selectDepartment"
+                [ngClass]="{ 'is-invalid': submitted && f.departmentId.errors }"
+                (change)="updateCitiesByDepartment($event.target.value)">
+          <option *ngFor="let department of departments" [value]="department.id">
+            {{ department.name }}
+          </option>
+        </select>
+        <div *ngIf="submitted && f.departmentId.errors" class="invalid-feedback">
+          <div *ngIf="f.departmentId.errors.required">Le département est obligatoire</div>
+        </div>
+      </div>
+
+      <div class="form-group input-group-sm col-md-6">
+        <label for="selectCity">Commune</label>
+        <select class="form-control" formControlName="city" id="selectCity"
+                [ngClass]="{ 'is-invalid': submitted && f.city.errors }"
+                (change)="getSelectedCity($event.target.value)">
+          <option *ngFor="let city of cities" [value]="city.id">
+            {{ city.name }}
+          </option>
+        </select>
+        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+          <div *ngIf="f.city.errors.required">La ville est obligatoire</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form line 7 -->
+    <div class="form-row mt-3">
+      <!-- Validate selection -->
+      <div class="form-group input-group-sm col-md-12">
+        <button type="submit" class="btn btn-primary btn-sm form-btn-search ml-0"
+                style="margin-top: 0;">Enregistrer
+        </button>
+        <button type="submit" class="btn btn-warning btn-sm form-btn-search"
+                style="margin-top: 0;" (click)="resetTripForm()">Réinitialiser le formulaire
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

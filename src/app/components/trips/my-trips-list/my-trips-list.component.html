@@ -1,0 +1,26 @@
+<div>
+  <h5> {{ pager.totalElements + " sorties trouvés"}} </h5>
+
+  <ul class="list-group mt-3"   >
+    <li *ngFor="let trip of trips" class="list-group-item list-group-item-action ">
+      <div class="media">
+        <div class="media-body">
+          <h5 class="mt-0 mb-1">{{ trip.name }}</h5>
+          <p> Sortie le {{ trip.dateTrip }}
+            <br/>
+            {{trip.users.length}} / {{trip.nbPerson}}  age entre {{trip.ageMin}} et {{trip.ageMax}}
+          </p>
+          <button type="button" class="btn btn-info btn-sm" (click)="updateTrip(trip)">Modifier</button>
+          <button type="button" class="btn btn-info btn-sm ml-2" (click)="deleteTrip(trip)">Supprimer</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Paginator -->
+  <app-my-paginator
+    [pagerParams]="pager"
+    (notifyPagination)="onPaginate($event)"
+  ></app-my-paginator>
+</div>
+
