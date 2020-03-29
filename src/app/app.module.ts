@@ -14,7 +14,6 @@ import { BirthdaysComponent } from './components/community/birthdays/birthdays.c
 import { UsersManagerComponent } from './components/community/users-manager/users-manager.component';
 import { TripsManagerComponent } from './components/trips/trips-manager/trips-manager.component';
 import { TripCreateComponent } from './components/trip/trip-create/trip-create.component';
-import { TripUpdateComponent } from './components/trip/trip-update/trip-update.component';
 import { MyTripsManagerComponent } from './components/trips/my-trips-manager/my-trips-manager.component';
 import { TripsManagerFilterFormComponent } from './components/trips/trips-manager-filter-form/trips-manager-filter-form.component';
 import { TripDetailsComponent } from './components/trip/trip-details/trip-details.component';
@@ -25,6 +24,8 @@ import { BreadcrumbComponent } from './components/commons/breadcrumb/breadcrumb.
 import { MyPaginatorComponent } from './components/commons/my-paginator/my-paginator.component';
 import { UserManagerComponent } from './components/community/user-manager/user-manager.component';
 import { TripsListComponent } from './components/trips/trips-list/trips-list.component';
+import { TripUpdateComponent } from './components/trip/trip-update/trip-update.component';
+import { MyTripsListComponent } from './components/trips/my-trips-list/my-trips-list.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,6 @@ import { TripsListComponent } from './components/trips/trips-list/trips-list.com
     UsersManagerComponent,
     TripsManagerComponent,
     TripCreateComponent,
-    TripUpdateComponent,
     MyTripsManagerComponent,
     TripsManagerFilterFormComponent,
     TripDetailsComponent,
@@ -46,7 +46,9 @@ import { TripsListComponent } from './components/trips/trips-list/trips-list.com
     BreadcrumbComponent,
     MyPaginatorComponent,
     UserManagerComponent,
-    TripsListComponent
+    TripsListComponent,
+    TripUpdateComponent,
+    MyTripsListComponent
   ],
   imports: [
     FormsModule,

@@ -46,7 +46,6 @@ export class TripDetailsComponent implements OnInit, OnChanges {
    * @event: onNotifyHideUser<User>
    */
   hide() {
-    console.log(this.trip.users);
     this.onNotifyHideTrip.emit(this.trip);
   }
 

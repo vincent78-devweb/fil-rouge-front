@@ -8,13 +8,13 @@ export interface Trip {
     dateTrip: string,
     timeStart: string,
     timeEnd: string,
-  //  nbRegistration: number, // Pas présent dans la table TRIP -> A ajouter dans le DTO
     nbPerson: number,
     description: string,
     promoteur: User,
     users: User[],
     city: City,
-    pois: Poi,
+    poi: Poi,
     ageMin: number,
     ageMax: number
 }
+

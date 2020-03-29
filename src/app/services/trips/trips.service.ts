@@ -7,6 +7,8 @@ import { Region } from '../../models/zone/region';
 import { Department } from '../../models/zone/department';
 import {TripsListPager} from '../../models/trips/trips-list-pager';
 import {Trip} from '../../models/trips/trip';
+import {UserPut} from '../../models/community/user-put';
+import {TripManager} from '../../models/trips/trip-manager';
 
 
 @Injectable({
@@ -54,6 +56,8 @@ export class TripsService {
     return this.http.get<Trip>('http://localhost:8080/api/trips/register', {params});
 
   }
+
+
 
 
   public getRegions(): Observable<Region[]> {

@@ -1,18 +1,16 @@
 <div class="container-fluid">
-    <!-- Breadcrumb -->
-  <app-breadcrumb [title]="title" [level1]="level1" [level2]="level2" ></app-breadcrumb>
+  <!-- Breadcrumb -->
+  <app-breadcrumb [title]="title" [level1]="level1" [level2]="level2"></app-breadcrumb>
+
+  <!-- Trip list -->
+  <div [style.display]="isListTripVisible ? 'block' : 'none'">
+    <app-my-trips-list  (onNotifyShowTrip)="notifyShowTrip($event)">
+    </app-my-trips-list>
+  </div>
+
+  <!-- User details -->
+  <div [style.display]="isTripVisible ? 'block' : 'none'">
+    <app-trip-update [trip]="trip" (onNotifyHideTrip)="notifyHideTrip($event)"></app-trip-update>
+  </div>
 
 </div>
-
-<!-- Trip list -->
-<div [style.display]="isListTripVisible ? 'block' : 'none'">
-  <app-trips-list  (onNotifyShowTrip)="notifyShowTrip($event)">
-  </app-trips-list>
-</div>
-
-<!-- User details -->
-<div [style.display]="isTripVisible ? 'block' : 'none'">
-  <app-trip-details [trip]="trip" (onNotifyHideTrip)="notifyHideTrip($event)"></app-trip-details>
-</div>
-
-

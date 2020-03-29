@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Trip} from '../../../models/trips/trip';
 import {TripsService} from '../../../services/trips/trips.service';
 import {TripFilters} from '../../../models/trips/trip-filters';
+import {UsersService} from '../../../services/users/users.service';
 
 @Component({
   selector: 'app-my-trips-manager',
@@ -10,10 +11,11 @@ import {TripFilters} from '../../../models/trips/trip-filters';
 })
 export class MyTripsManagerComponent implements OnInit,  AfterViewInit {
 
-  title: string = "Les sorties";
-  level1: string = "";
-  level2: string = "";
+  title = 'Les sorties';
+  level1 = '';
+  level2 = '';
 
+  isFormListVisible = true;
   isListTripVisible = true;
   isTripVisible = false;
   trip: Trip;
@@ -21,23 +23,23 @@ export class MyTripsManagerComponent implements OnInit,  AfterViewInit {
 
   constructor(
     private tripsService: TripsService,
+    private usersService: UsersService,
 
   ) { }
 
   ngOnInit() {
-    this.currentUser = 1 ;
   }
 
 
 
   ngAfterViewInit(): void {
-    this.currentUser = 2;
-    let filter: TripFilters = {
+    this.currentUser = this.usersService.currentUser.id ;
+    const filter: TripFilters = {
       poiId: 0,
       regionId: 0,
       departmentId: 0,
       keywords: '',
-      userId: 2,
+      userId: this.currentUser,
       startDate: ''
     } ;
     this.tripsService.filterSubject.next(filter);
@@ -49,10 +51,10 @@ export class MyTripsManagerComponent implements OnInit,  AfterViewInit {
   /**
    * Toggle display from [form filters, user list] to user details
    *
-   * @param user the user to display
+   * param user the user to display
    */
   notifyShowTrip(trip: Trip) {
-    // Update the breadcrumb : show user name
+    // Update the breadcrumb : show user given name
     this.trip = trip;
     //  this.level2 = user.firstname + " " + user.lastname;
     // Toggle : hide form filters and user list
@@ -64,7 +66,7 @@ export class MyTripsManagerComponent implements OnInit,  AfterViewInit {
   /**
    * Toggle display from user details to [form filters, user list]
    *
-   * @param user the user to hide
+   * param user the user to hide
    */
   notifyHideTrip(trip: Trip) {
     // Update the breadcrumb : hide user name

@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import * as _ from "lodash";
+import {Component, OnInit} from '@angular/core';import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
-import { UsersService } from '../../../services/users/users.service';
-import { TripsService } from '../../../services/trips/trips.service';
-import { CitiesService } from '../../../services/cities/cities.service';
-import { User } from '../../../models/community/user';
-import { Department } from '../../../models/zone/department';
-import { PoiElt } from '../../../models/commons/poi-elt';
-import { PoisService } from '../../../services/pois/pois.service';
-import { City } from '../../../models/zone/city';
-import { UserPut } from '../../../models/community/user-put';
+import {UsersService} from '../../../services/users/users.service';
+import {TripsService} from '../../../services/trips/trips.service';
+import {CitiesService} from '../../../services/cities/cities.service';
+import {User} from '../../../models/community/user';
+import {Department} from '../../../models/zone/department';
+import {PoiElt} from '../../../models/commons/poi-elt';
+import {PoisService} from '../../../services/pois/pois.service';
+import {City} from '../../../models/zone/city';
+import {UserPut} from '../../../models/community/user-put';
 
 @Component({
   selector: 'app-user-manager',
@@ -149,7 +147,7 @@ export class UserManagerComponent implements OnInit {
 
   /**
    * Update City combox box when the department selection has changed
-   * @param departmentId 
+   * @param departmentId
    */
   updateCitiesByDepartment(departmentId: number) {
     this.initCities(departmentId);
@@ -157,7 +155,7 @@ export class UserManagerComponent implements OnInit {
 
   /**
    * Validate the user form
-   * @param userFormValues 
+   * @param userFormValues
    */
   saveUser(userFormValues) {
     this.submitted = true;

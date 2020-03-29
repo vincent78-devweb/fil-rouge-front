@@ -79,7 +79,6 @@ export class TripsListComponent implements OnInit, OnChanges {
     this.pageNumber = pageNumber;
     this.tripsService.filterTrips(this.tripFilters.poiId, this.tripFilters.regionId, this.tripFilters.departmentId, this.tripFilters.keywords, this.tripFilters.userId, this.tripFilters.startDate, pageNumber, 20, "name,asc").subscribe(data => {
       const tripsListPager: TripsListPager = data;
-      console.log(data)
       this.trips = data.content;
 
       let currentPager: PagerParams;

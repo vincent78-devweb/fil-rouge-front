@@ -1,13 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import { of, Observable, Subject, throwError } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {Observable, Subject, throwError} from 'rxjs';
 
-import { catchError, retry } from 'rxjs/operators';
-
-import { User } from '../../models/community/user';
-import { UserFilters } from '../../models/community/user-filters';
-import { UsersListPager } from '../../models/community/users-list-pager';
-import { UserPut } from '../../models/community/user-put';
+import {User} from '../../models/community/user';
+import {UsersListPager} from '../../models/community/users-list-pager';
+import {UserPut} from '../../models/community/user-put';
 
 @Injectable({
   providedIn: 'root'
@@ -33,15 +30,15 @@ export class UsersService {
 
   /**
    * Filter users
-   * 
-   * @param gender 
-   * @param ageCategory 
-   * @param pseudo 
-   * @param region 
-   * @param department 
-   * @param page 
-   * @param size 
-   * @param sort 
+   *
+   * @param gender
+   * @param ageCategory
+   * @param pseudo
+   * @param region
+   * @param department
+   * @param page
+   * @param size
+   * @param sort
    */
   public filterUsers(gender: string, ageCategory :string, pseudo: string, region: number, department: number, page: number, size: number, sort: string) :Observable<UsersListPager> {
     // Set parameters
@@ -73,8 +70,8 @@ export class UsersService {
 
   /**
    * Save a user on the server
-   * @param user 
-   * @param id 
+   * @param user
+   * @param id
    */
   public saveUser(user: UserPut, id: number) {
     // Set parameters
@@ -82,7 +79,7 @@ export class UsersService {
       // Refresh fake current user
       this.getUser(1).subscribe(data => {
         this.currentUser = data;
-      });
+      },error => {console.log('perdu');});
     });
   }
 
@@ -117,7 +114,7 @@ export class UsersService {
    * Fake authentification : initial current user
    */
   setCurrentUser() {
-    this.currentUser = 
+    this.currentUser =
     {id:1,
     firstname:"Georas",
     lastname:"Perazzo",
@@ -126,7 +123,7 @@ export class UsersService {
     avatar:"http://icons.iconarchive.com/icons/google/noto-emoji-people-face/128/10147-adult-light-skin-tone-icon.png",
     description:"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.",
     birthday:"1985-04-23",
-    dateCreation:"23/06/2019 00:00",
+    dateCreation:"2020-04-23",
     age:34,
     city:{
       id:1589,
